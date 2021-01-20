@@ -122,33 +122,34 @@
             //      document.getElementById("listdevice").innerHTML=message;
             // }
             } else if (type == 'get_service') {
-                let obj = JSON.parse(data);
-
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i];
+                let obj1 = JSON.parse(data);
+                for (let i = 0; i < obj1.data.length; i++) {
+                    let a = obj1.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
                     message2 += `
-                        name : ${data.device_name}<br>
-                        uuid : ${data.device_uuid}<br>
-                        data : ${data.data}<br>
+                        name : ${a.device_name}<br>
+                        uuid : ${a.device_uuid}<br>
+                        data : ${a.data}<br>
+                        data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
                 document.getElementById("listservice").innerHTML=message2;
             } else if (type == 'write_characteristic') {
-                let obj = JSON.parse(data);
+                let obj2 = JSON.parse(data);
 
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i];
+                for (let i = 0; i < obj2.data.length; i++) {
+                    let c = obj2.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
                     message3 += `
-                        name : ${data.type}<br>
-                        uuid : ${data.characteristic_uuid}<br>
-                        data : ${data.data}<br>
+                        name : ${c.type}<br>
+                        uuid : ${c.characteristic_uuid}<br>
+                        data : ${c.data}<br>
+                        data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
