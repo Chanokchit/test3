@@ -60,6 +60,7 @@
         let message1 = '';
         let message2 = '';
         let message3 = '';
+        let message4 = '';
         try {
             if (type == 'get_device_service') {
                 let obj = JSON.parse(data);
@@ -136,19 +137,20 @@
                 }
                 document.getElementById("listservice").innerHTML=message2;
             } else if (type == 'get_characteristic') {
-                let obj = JSON.parse(data);
-                for (let i = 0; i < obj.data.length; i++) {
-                    let a = obj.data[i];
+                let obj3 = JSON.parse(data);
+                for (let i = 0; i < obj3.data.length; i++) {
+                    let d = obj3.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
-                    message2 += `
-                        characteristic : ${a}<br>
+                    message3 += `
+                        characteristic : ${d}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("listcharacteristic").innerHTML=message2;
+                document.getElementById("listcharacteristic").innerHTML=message3;
+                
             } else if (type == 'write_characteristic') {
                 let obj2 = JSON.parse(data);
 
@@ -157,7 +159,7 @@
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
-                    message3 += `
+                    message4 += `
                         characteristic : ${c}<br>
                         data : ${data}<br>
                         name : ${c.type}<br>
@@ -167,7 +169,7 @@
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("listwrite").innerHTML=message3;
+                document.getElementById("listwrite").innerHTML=message4;
             }
             // } else if (type == 'get_characteristic') {
             //     var obj = JSON.parse(data)
