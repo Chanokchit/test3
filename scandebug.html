@@ -57,14 +57,14 @@
 
 
     function oneChatBluetoothCallBackData(type, data) {
-        let message1 = '';
-        let message2 = '';
-        let message3 = '';
-        let message4 = '';
+        // let message1 = '';
+        // let message2 = '';
+        // let message3 = '';
+        // let message4 = '';
         try {
             if (type == 'get_device_service') {
                 let obj = JSON.parse(data);
-
+                var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
                     let d = obj.data[i];
                     let mfdata = 'N/A';
@@ -103,7 +103,7 @@
                     // m : ${m}<br>
                     // mx : ${mx}<br>
 
-                    message1 += `
+                    message += `
                         name : ${d.bluetooth_name}<br>
                         uuid : ${d.uuid}<br>
                         manufacturer_data : ${mfdata}<br>
@@ -112,7 +112,7 @@
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("devicelist").innerHTML=message1;
+                document.getElementById("devicelist").innerHTML=message;
             // } else if (type == 'get_device_service') {
             //      var obj = JSON.parse(data)
             //      var message = '<u>รายชื่ออุปกรณ์ </u><br/>'
@@ -123,36 +123,38 @@
             //      document.getElementById("listdevice").innerHTML=message;
             // }
             } else if (type == 'get_service') {
-                let obj1 = JSON.parse(data);
-                for (let i = 0; i < obj1.data.length; i++) {
-                    let a = obj1.data[i];
+                let obj = JSON.parse(data);
+                var message = ''
+                for (let i = 0; i < obj.data.length; i++) {
+                    let a = obj.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
-                    message2 += `
+                    message += `
                         service : ${a}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("listservice").innerHTML=message2;
+                document.getElementById("listservice").innerHTML=message;
 
             } else {
                 let obj = JSON.parse(data);
+                var message = ''
                 document.getElementById("test").innerHTML="testget_characteristic";
                 for (let i = 0; i < obj.data.length; i++) {
                     let d = obj.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
-                    message3 += `
+                    message += `
                         type : ${type}<br>
                         characteristic : ${d}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("listcharacteristic").innerHTML=message3;
+                document.getElementById("listcharacteristic").innerHTML=message;
             } 
             // else if (type == 'write_characteristic') {
             //     let obj2 = JSON.parse(data);
@@ -214,7 +216,7 @@
         <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
     </h1>
     <br/>
-        <div id="listcharacteristic" width=300></textarea>
+        <div id="listcharacteristic" width=300></div>
     <br/>
     <br/>
         <span id="test">test</span>
@@ -224,7 +226,7 @@
         <a href="javascript:getPrimaryService();">[ get service ]</a>
     </h1>
     <br/>
-        <div id="listservice" width=300></textarea>
+        <div id="listservice" width=300></div>
     <br/>
     <h1>
         <a href="javascript:scanDevice();">[ scan device ]</a>
