@@ -123,15 +123,15 @@
             // }
             } else if (type == 'get_service') {
                 let obj1 = JSON.parse(data);
-                for (let i = 0; i < obj1.length; i++) {
-                    let a = obj1[i];
+                for (let i = 0; i < obj1.data.length; i++) {
+                    let a = obj1.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
                     message2 += `
                         a    : ${a}<br>
-                        name : ${a.device_name}<br>
-                        uuid : ${a.device_uuid}<br>
+                        name : ${device_name}<br>
+                        uuid : ${device_uuid}<br>
                         data : ${a.data}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
