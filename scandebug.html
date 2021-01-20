@@ -138,10 +138,10 @@
                 document.getElementById("listservice").innerHTML=message2;
 
             } else {
-                let obj3 = JSON.parse(data);
-                document.getElementById("test").innerHTML="test get_characteristic";
-                for (let i = 0; i < obj3.data.length; i++) {
-                    let d = obj3.data[i];
+                let obj = JSON.parse(data);
+                document.getElementById("test").innerHTML="testget_characteristic";
+                for (let i = 0; i < obj.data.length; i++) {
+                    let d = obj.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
