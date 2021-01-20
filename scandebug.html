@@ -8,7 +8,8 @@
     var uuid_device01 = '54F888C9-EFEF-68D2-B21D-A730AC675099'
     var uuid_service01 = ''
     var uuid_characteristic_read = ''
-    var uuid_characteristic_write = ''
+    var uuid_characteristic_write = '2A39'
+    var datawrite = 'test-fern'
 
     function scanDevice() {
         try {
@@ -31,7 +32,13 @@
         alert('getCharacteristic ' + error)
       }
     }
-
+    function writeCharacteristic() {
+      try {
+        webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite});
+      } catch(error) {
+        alert('writeCharacteristic ' + error)
+      }
+    }
     function readCharacteristic() {
       try {
         webkit.messageHandlers.readCharacteristic.postMessage(uuid_characteristic_read);
@@ -40,17 +47,19 @@
       }
     }
 
-    function writeCharacteristic() {
-      try {
-        webkit.messageHandlers.writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: document.getElementById("write_characteristic").value});
-      } catch(error) {
-        alert('writeCharacteristic ' + error)
-      }
-    }
+    // function writeCharacteristic() {
+    //   try {
+    //     webkit.messageHandlers.writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: document.getElementById("write_characteristic").value});
+    //   } catch(error) {
+    //     alert('writeCharacteristic ' + error)
+    //   }
+    // }
 
 
     function oneChatBluetoothCallBackData(type, data) {
-        let message = '';
+        let message1 = '';
+        let message2 = '';
+        let message3 = '';
         try {
             if (type == 'get_device_service') {
                 let obj = JSON.parse(data);
@@ -93,7 +102,7 @@
                     // m : ${m}<br>
                     // mx : ${mx}<br>
 
-                    message += `
+                    message1 += `
                         name : ${d.bluetooth_name}<br>
                         uuid : ${d.uuid}<br>
                         manufacturer_data : ${mfdata}<br>
@@ -102,7 +111,7 @@
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("devicelist").innerHTML=message;
+                document.getElementById("devicelist").innerHTML=message1;
             // } else if (type == 'get_device_service') {
             //      var obj = JSON.parse(data)
             //      var message = '<u>รายชื่ออุปกรณ์ </u><br/>'
@@ -113,16 +122,6 @@
             //      document.getElementById("listdevice").innerHTML=message;
             // }
             } else if (type == 'get_service') {
-                // var obj = JSON.parse(data)
-                // var message = '<u>รายชื่อบริการ </u><br/>'
-                // uuid_service01 = obj.uuid[0]
-                // for (var i = 0; i < obj.uuid.length; i += 1) {
-                // message = message + '<p>' + obj.uuid[i] + '</p>'
-                // if (obj.uuid[i] == 'AB10') {
-                //     uuid_service01 = 'AB10'
-                // }
-                // }
-                // let message = '';
                 let obj = JSON.parse(data);
 
                 for (let i = 0; i < obj.data.length; i++) {
@@ -130,14 +129,30 @@
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
-                    message += `
-                        name : ${d.device_name}<br>
-                        uuid : ${d.device_uuid}<br>
-                        data : ${data}<br>
+                    message2 += `
+                        name : ${data.device_name}<br>
+                        uuid : ${data.device_uuid}<br>
+                        data : ${data.data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("listservice").innerHTML=message;
+                document.getElementById("listservice").innerHTML=message2;
+            } else if (type == 'write_characteristic') {
+                let obj = JSON.parse(data);
+
+                for (let i = 0; i < obj.data.length; i++) {
+                    let d = obj.data[i];
+                    // let mfdata = 'N/A';
+                    // let m = {}, mx;
+
+                    message3 += `
+                        name : ${data.type}<br>
+                        uuid : ${data.characteristic_uuid}<br>
+                        data : ${data.data}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                }
+                document.getElementById("listwrite").innerHTML=message3;
             }
             // } else if (type == 'get_characteristic') {
             //     var obj = JSON.parse(data)
@@ -169,6 +184,12 @@
 
 </script>
 <body>
+    <h1>
+        <a href="javascript:writeCharacteristic();">[ write ]</a>
+    </h1>
+    <br/>
+        <div id="listwrite" width=300></textarea>
+    <br/>
     <h1>
         <a href="javascript:getPrimaryService();">[ get device ]</a>
     </h1>
