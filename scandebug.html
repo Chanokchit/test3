@@ -136,9 +136,9 @@
                 }
                 document.getElementById("listservice").innerHTML=message2;
             } else if (type == 'get_characteristic') {
-                let obj1 = JSON.parse(data);
-                for (let i = 0; i < obj1.data.length; i++) {
-                    let a = obj1.data[i];
+                let obj = JSON.parse(data);
+                for (let i = 0; i < obj.data.length; i++) {
+                    let a = obj.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
