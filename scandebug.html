@@ -34,7 +34,7 @@
     }
     function writeCharacteristicByUUID() {
       try {
-        webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device01 ,service_uuid: uuid_service01 ,characteristic_uuid: uuid_characteristic_write ,data: datawrite});
+        webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid: uuid_device01 ,service_uuid: uuid_service01 ,characteristic_uuid: uuid_characteristic_write ,data: datawrite});
       } catch(error) {
         alert('writeCharacteristicByUUID ' + error)
       }
