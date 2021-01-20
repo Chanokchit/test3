@@ -137,42 +137,43 @@
                 }
                 document.getElementById("listservice").innerHTML=message2;
 
-            } else if (type == 'get_characteristic') {
+            } else {
                 let obj3 = JSON.parse(data);
+                document.getElementById("test").innerHTML="test get_characteristic";
                 for (let i = 0; i < obj3.data.length; i++) {
                     let d = obj3.data[i];
                     // let mfdata = 'N/A';
                     // let m = {}, mx;
 
                     message3 += `
+                        type : ${type}<br>
                         characteristic : ${d}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
                 document.getElementById("listcharacteristic").innerHTML=message3;
-                document.getElementById("test").innerHTML="test get_characteristic";
-                
-            } else if (type == 'write_characteristic') {
-                let obj2 = JSON.parse(data);
+            } 
+            // else if (type == 'write_characteristic') {
+            //     let obj2 = JSON.parse(data);
 
-                for (let i = 0; i < obj2.data.length; i++) {
-                    let c = obj2.data[i];
-                    // let mfdata = 'N/A';
-                    // let m = {}, mx;
+            //     for (let i = 0; i < obj2.data.length; i++) {
+            //         let c = obj2.data[i];
+            //         // let mfdata = 'N/A';
+            //         // let m = {}, mx;
 
-                    message4 += `
-                        characteristic : ${c}<br>
-                        data : ${data}<br>
-                        name : ${c.type}<br>
-                        uuid : ${c.service_uuid}<br>
-                        data : ${c.data}<br>
-                        data : ${data}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
-                document.getElementById("listwrite").innerHTML=message4;
-            }
+            //         message4 += `
+            //             characteristic : ${c}<br>
+            //             data : ${data}<br>
+            //             name : ${c.type}<br>
+            //             uuid : ${c.service_uuid}<br>
+            //             data : ${c.data}<br>
+            //             data : ${data}<br>
+            //             -----------------------------------------------------<br>
+            //         `;
+            //     }
+            //     document.getElementById("listwrite").innerHTML=message4;
+            // }
             // } else if (type == 'get_characteristic') {
             //     var obj = JSON.parse(data)
             //     var message = '<u>รายชื่อcharacteristic</u><br/>'
