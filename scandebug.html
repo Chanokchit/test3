@@ -59,17 +59,17 @@
                     let d = obj.data[i];
                     let mfdata = 'N/A';
                     let m = {}, mx;
-                    if (d.bluetooth_name == 'fe_fern') {
-                        try {
-                            uuid_device01 = d.uuid
-                            document.getElementById("uuid").innerHTML = uuid_device01;
-                        }
-                        catch(e) {
-                            m = 'error'
-                        }
-                    }else {
-                        document.getElementById("uuid").innerHTML = 'no fefern';
-                    }
+                    // if (d.bluetooth_name == 'fe_fern') {
+                    //     try {
+                    //         uuid_device01 = d.uuid
+                    //         document.getElementById("uuid").innerHTML = uuid_device01;
+                    //     }
+                    //     catch(e) {
+                    //         m = 'error'
+                    //     }
+                    // }else {
+                    //     document.getElementById("uuid").innerHTML = 'no fefern';
+                    // }
                     if (d.manufacturer_data) {
                         try {
                             mx = d.manufacturer_data.replace(/[{} ]/g,'');
@@ -160,7 +160,7 @@
     <br/>
         <div id="devicelist" width=300></textarea>
     <br/>
-    <h3 id="uuid" style="color:rgb(207, 45, 5);">uuid</h3>
+    <!-- <h3 id="uuid" style="color:rgb(207, 45, 5);">uuid</h3> -->
     <!-- <h1> 
         <a href="javascript:scanDevice();">scan Device</a>
     </h1>
