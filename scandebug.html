@@ -67,6 +67,8 @@
                         catch(e) {
                             m = 'error'
                         }
+                    }else {
+                        document.getElementById("uuid").innerHTML = "no fe_fern";
                     }
                     if (d.manufacturer_data) {
                         try {
@@ -158,7 +160,7 @@
     <br/>
         <div id="devicelist" width=300></textarea>
     <br/>
-    <h3 id="notibatt" style="color:rgb(207, 45, 5);">uuid</h3>
+    <h3 id="uuid" style="color:rgb(207, 45, 5);">uuid</h3>
     <!-- <h1> 
         <a href="javascript:scanDevice();">scan Device</a>
     </h1>
