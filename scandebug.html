@@ -57,10 +57,6 @@
 
 
     function oneChatBluetoothCallBackData(type, data) {
-        // let message1 = '';
-        // let message2 = '';
-        // let message3 = '';
-        // let message4 = '';
         try {
             if (type == 'get_device_service') {
                 let obj = JSON.parse(data);
@@ -138,22 +134,22 @@
                 }
                 document.getElementById("listservice").innerHTML=message;
 
-            } else {
+            } else if (type == 'get_characteristic') {
                 let obj = JSON.parse(data);
-                var message = ''
+                var message = '123'
                 document.getElementById("test").innerHTML="testget_characteristic>>>>", data;
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i];
-                    // let mfdata = 'N/A';
-                    // let m = {}, mx;
+                // for (let i = 0; i < obj.data.length; i++) {
+                //     let d = obj.data[i];
+                //     // let mfdata = 'N/A';
+                //     // let m = {}, mx;
 
-                    message += `
-                        type : ${type}<br>
-                        characteristic : ${d}<br>
-                        data : ${data}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
+                //     message += `
+                //         type : ${type}<br>
+                //         characteristic : ${d}<br>
+                //         data : ${data}<br>
+                //         -----------------------------------------------------<br>
+                //     `;
+                // }
                 document.getElementById("listcharacteristic").innerHTML=message;
             } 
             // else if (type == 'write_characteristic') {
