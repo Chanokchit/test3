@@ -6,7 +6,7 @@
     let time_scan = 8000;
     let error_count = 0;
     var uuid_device01 = '54F888C9-EFEF-68D2-B21D-A730AC675099'
-    var uuid_service01 = ''
+    var uuid_service01 = '180D'
     var uuid_characteristic_read = ''
     var uuid_characteristic_write = '2A39'
     var datawrite = 'test-fern'
@@ -27,7 +27,7 @@
     }
     function getCharacteristic() {
       try {
-        webkit.messageHandlers.getCharacteristic.postMessage(uuid_service01);
+        webkit.messageHandlers.OneChat_getCharacteristic.postMessage(uuid_service01);
       } catch(error) {
         alert('getCharacteristic ' + error)
       }
@@ -129,12 +129,26 @@
                     // let m = {}, mx;
 
                     message2 += `
-                        get_service : ${a}<br>
+                        service : ${a}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
                 document.getElementById("listservice").innerHTML=message2;
+            } else if (type == 'get_characteristic') {
+                let obj1 = JSON.parse(data);
+                for (let i = 0; i < obj1.data.length; i++) {
+                    let a = obj1.data[i];
+                    // let mfdata = 'N/A';
+                    // let m = {}, mx;
+
+                    message2 += `
+                        characteristic : ${a}<br>
+                        data : ${data}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                }
+                document.getElementById("listcharacteristic").innerHTML=message2;
             } else if (type == 'write_characteristic') {
                 let obj2 = JSON.parse(data);
 
@@ -144,8 +158,10 @@
                     // let m = {}, mx;
 
                     message3 += `
+                        characteristic : ${c}<br>
+                        data : ${data}<br>
                         name : ${c.type}<br>
-                        uuid : ${c.characteristic_uuid}<br>
+                        uuid : ${c.service_uuid}<br>
                         data : ${c.data}<br>
                         data : ${data}<br>
                         -----------------------------------------------------<br>
@@ -190,7 +206,13 @@
         <div id="listwrite" width=300></div>
     <br/>
     <h1>
-        <a href="javascript:getPrimaryService();">[ get device ]</a>
+        <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
+    </h1>
+    <br/>
+        <div id="listcharacteristic" width=300></div>
+    <br/>
+    <h1>
+        <a href="javascript:getPrimaryService();">[ get service ]</a>
     </h1>
     <br/>
         <div id="listservice" width=300></textarea>
