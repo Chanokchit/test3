@@ -3,10 +3,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <script type="text/javascript">
-    let time_scan = 8000;
+    let time_scan = 50000;
     let error_count = 0;
     var uuid_device01 = '54F888C9-EFEF-68D2-B21D-A730AC675099'
-    var uuid_service01 = 'D0611E78-BBB4-4591-A5F8-487910AE4366'
+    var uuid_service01 = '180D'
     var uuid_characteristic_read = ''
     var uuid_characteristic_write = '2A39'
     var datawrite = 'test-fern'
@@ -150,7 +150,7 @@
                     `;
                 }
                 document.getElementById("listcharacteristic").innerHTML=message3;
-
+                
             } else if (type == 'write_characteristic') {
                 let obj2 = JSON.parse(data);
 
