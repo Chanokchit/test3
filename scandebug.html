@@ -34,7 +34,7 @@
     }
     function writeCharacteristicByUUID() {
       try {
-        webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device01 ,service_uuid:uuid_service01 ,characteristic_uuid: uuid_characteristic_write ,data: datawrite});
+        webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device01 ,service_uuid: uuid_service01 ,characteristic_uuid: uuid_characteristic_write ,data: datawrite});
       } catch(error) {
         alert('writeCharacteristicByUUID ' + error)
       }
@@ -160,9 +160,9 @@
                 document.getElementById("listcharacteristic").innerHTML=message;
 
             } else if (type == 'write_characteristic_by_uuid') {
+                document.getElementById("test").innerHTML="testwrite_characteristic_by_uuid>>>>";
                 let obj = JSON.parse(data);
                 var message = ''
-                document.getElementById("test").innerHTML="testwrite_characteristic_by_uuid>>>>", data;
                 for (let i = 0; i < obj.data.length; i++) {
                     let a = obj.data[i];
                     // let mfdata = 'N/A';
@@ -216,6 +216,7 @@
             // }
         }}
         catch(error) {
+            alert(' write  >>>>>>>>' + error);
             if (error_count == 0) {
                 alert(error);
             }
@@ -225,6 +226,8 @@
 
 </script>
 <body>
+    <span id="test">test</span>
+    <br>
     <h1>
         <a href="javascript:writeCharacteristicByUUID();">[ write ]</a>
     </h1>
@@ -238,8 +241,8 @@
         <div id="listcharacteristic" width=300></div>
     <br/>
     <br/>
-        <span id="test">test</span>
-        <div id="test" width=300></div>
+        
+        <!-- <div id="test" width=300></div> -->
     <br/>
     <h1>
         <a href="javascript:getPrimaryService();">[ get service ]</a>
