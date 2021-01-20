@@ -136,6 +136,7 @@
                     `;
                 }
                 document.getElementById("listservice").innerHTML=message2;
+
             } else if (type == 'get_characteristic') {
                 let obj3 = JSON.parse(data);
                 for (let i = 0; i < obj3.data.length; i++) {
@@ -150,6 +151,7 @@
                     `;
                 }
                 document.getElementById("listcharacteristic").innerHTML=message3;
+                document.getElementById("test").innerHTML="test get_characteristic";
                 
             } else if (type == 'write_characteristic') {
                 let obj2 = JSON.parse(data);
@@ -211,7 +213,10 @@
         <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
     </h1>
     <br/>
-        <div id="listcharacteristic" width=300></div>
+        <div id="listcharacteristic" width=300></textarea>
+    <br/>
+    <br/>
+        <div id="test" width=300></div>
     <br/>
     <h1>
         <a href="javascript:getPrimaryService();">[ get service ]</a>
