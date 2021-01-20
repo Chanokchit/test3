@@ -19,7 +19,7 @@
     }
     function getPrimaryService() {
       try {
-        webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage(uuid_device01);
+        webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device01);
       } catch(error) {
         alert('getPrimaryService ' + error)
       }
