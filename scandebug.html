@@ -192,6 +192,7 @@
                 document.getElementById("listservice").innerHTML=message;
 
             } else if (type == 'get_characteristic') {
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
@@ -207,7 +208,7 @@
                 document.getElementById("listcharacteristic").innerHTML=message;
 
             } else if (type == 'write_characteristic') {
-                // alert (data)
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                     message += `
@@ -218,7 +219,7 @@
                 document.getElementById("write").innerHTML=message;
         
             } else if (type == 'write_characteristic_by_uuid') {
-                // alert (data)
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                     message += `
@@ -232,7 +233,7 @@
                 document.getElementById("writeUUID").innerHTML=message;
             
             } else if (type == 'read_characteristic') {
-                // alert (data)
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                     message += `
@@ -243,7 +244,7 @@
                 document.getElementById("read").innerHTML=message;
             
             } else if (type == 'read_characteristic_by_uuid') {
-                // alert (data)
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                     message += `
