@@ -195,12 +195,12 @@
                 let obj = JSON.parse(data);
                 var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
-                let d = JSON.parse(obj.data[i])
-
+                    let d = obj.data[i]
+                    let obj2 = JSON.parse(d);
                     message += `
-                        uuid : ${d.uuid}<br>
-                        type : ${d.type}<br>
-                        descriptors : ${d.descriptors}<br>
+                        uuid : ${obj2.uuid}<br>
+                        type : ${obj2.type}<br>
+                        descriptors : ${obj2.descriptors}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
@@ -268,10 +268,6 @@
     <!-- <span id="test">test</span>
     <br> -->
     <h1>
-        <a href="javascript:scanDevice();">[ scan device ]</a>
-    </h1>
-        <div id="listdevice" width=300></div>
-    <h1>
         <a href="javascript:scanDevice();">[ start scan device ]</a>
     </h1>
         <div id="startdevice" width=300></div>
@@ -287,6 +283,10 @@
         <a href="javascript:disconnectBluetoothByUUID();">[ disconnect bluetooth by UUID ]</a>
     </h1>
         <div id="disconnectbluetoothUUID" width=300></div>
+    <h1>
+        <a href="javascript:scanDevice();">[ scan device ]</a>
+    </h1>
+        <div id="listdevice" width=300></div>
     <h1>
         <a href="javascript:getPrimaryService();">[ get service ]</a>
     </h1>
