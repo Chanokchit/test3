@@ -3,64 +3,100 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <script type="text/javascript">
-    let time_scan = 50000;
-    let error_count = 0;
-    var uuid_device01 = '54F888C9-EFEF-68D2-B21D-A730AC675099'
-    var uuid_service01 = '180D'
-    var uuid_characteristic_read = ''
+    let time_scan = 10000;
+    // let error_count = 0;
+    var uuid_device = '54F888C9-EFEF-68D2-B21D-A730AC675099'
+    var uuid_service = '180D'
+    var uuid_characteristic_read = '2A38'
     var uuid_characteristic_write = '2A39'
-    var datawrite = 'test-fern'
+    var datawrite = 'test write text by uuid 21/01/2021 ขอบคุณค่ะ'
+    
+// webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage({device_uuid:String,service_uuid:String})
+// webkit.messageHandlers.OneChat_connectServiceByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String})
+// webkit.messageHandlers.OneChat_readCharacteristicByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String,characteristic_uuid:String})
+// webkit.messageHandlers.OneChat_writeCharacteristicByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String,characteristic_uuid:String,data:String})
 
     function scanDevice() {
         try {
-            webkit.messageHandlers.scanDevice.postMessage(time_scan);
+            // webkit.messageHandlers.OneChat_scanDevice.postMessage(Int timeout_scan)	
+            webkit.messageHandlers.OneChat_scanDevice.postMessage(time_scan);
         } catch(error) {
             alert('scanDevice ' + error)
         }
+    }e
+    function stopscanDevice() {
+        try {
+            // webkit.messageHandlers.OneChat_stopScanDevice.postMessage(String Any)	
+            webkit.messageHandlers.OneChat_stopScanDevice.postMessage("Success");
+        } catch(error) {
+            alert('stop scanDevice' + error)
+        }
     }
+    function disconnectBluetoothAll() {
+        try {
+            // webkit.messageHandlers.OneChat_disconnectBluetoothAll.postMessage(String Any)
+            webkit.messageHandlers.OneChat_disconnectBluetoothAll.postMessage("Success")
+        } catch(error) {
+            alert('disconnectBluetoothAll ' + error)
+        }
+    }
+    function disconnectBluetoothByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(String uuid)	
+            webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(uuid_device);
+        } catch(error) {
+            alert('disconnectBluetoothByUUID' + error)
+        }
+    }
+    
     function getPrimaryService() {
-      try {
-        webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device01);
-      } catch(error) {
-        alert('getPrimaryService ' + error)
-      }
+        try {
+            // webkit.messageHandlers.OneChat_getPrimaryService.postMessage(String uuid)	
+            webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device);
+        } catch(error) {
+            alert('getPrimaryService ' + error)
+        }
     }
     function getCharacteristic() {
-      try {
-        webkit.messageHandlers.OneChat_getCharacteristic.postMessage(uuid_service01);
-      } catch(error) {
-        alert('getCharacteristic ' + error)
-      }
-    }
-    function writeCharacteristicByUUID() {
-      try {
-        webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device01 ,service_uuid: uuid_service01 ,characteristic_uuid: uuid_characteristic_write ,data: datawrite});
-      } catch(error) {
-        alert('writeCharacteristicByUUID ' + error)
-      }
+        try {
+            // webkit.messageHandlers.OneChat_getCharacteristic.postMessage(String uuid)
+            webkit.messageHandlers.OneChat_getCharacteristic.postMessage(uuid_service);
+        } catch(error) {
+            alert('getCharacteristic ' + error)
+        }
     }
     function writeCharacteristic() {
-      try {
-        webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite});
-      } catch(error) {
-        alert('writeCharacteristic ' + error)
-      }
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite});
+        } catch(error) {
+            alert('writeCharacteristic ' + error)
+        }
+    }
+    function writeCharacteristicByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite});
+        } catch(error) {
+            alert('writeCharacteristicByUUID ' + error)
+        }
     }
     function readCharacteristic() {
-      try {
-        webkit.messageHandlers.readCharacteristic.postMessage(uuid_characteristic_read);
-      } catch(error) {
-        alert('readCharacteristic ' + error)
-      }
+        try {
+            // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
+            webkit.messageHandlers.OneChat_readCharacteristic.postMessage({uuid: uuid_characteristic_read});
+        } catch(error) {
+            alert('readCharacteristic ' + error)
+        }
     }
-
-    // function writeCharacteristic() {
-    //   try {
-    //     webkit.messageHandlers.writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: document.getElementById("write_characteristic").value});
-    //   } catch(error) {
-    //     alert('writeCharacteristic ' + error)
-    //   }
-    // }
+    function readCharacteristicByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
+            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_read});
+        } catch(error) {
+            alert('readCharacteristicByUUID ' + error)
+        }
+    }
 
 
     function oneChatBluetoothCallBackData(type, data) {
@@ -72,17 +108,6 @@
                     let d = obj.data[i];
                     let mfdata = 'N/A';
                     let m = {}, mx;
-                    // if (d.bluetooth_name == 'fe_fern') {
-                    //     try {
-                    //         uuid_device01 = d.uuid
-                    //         document.getElementById("uuid").innerHTML = uuid_device01;
-                    //     }
-                    //     catch(e) {
-                    //         m = 'error'
-                    //     }
-                    // }else {
-                    //     document.getElementById("uuid").innerHTML = 'no fefern';
-                    // }
                     if (d.manufacturer_data) {
                         try {
                             mx = d.manufacturer_data.replace(/[{} ]/g,'');
@@ -91,7 +116,6 @@
                                 let b = c.split('=');
                                 m[b[0]] = b[1];
                             }
-
                             if (m) {
                                 mfdata = m.bytes;
                             } 
@@ -100,11 +124,6 @@
                             m = 'error'
                         }
                     }
-
-                    //let xx = require('util').inspect(d, false, null true);
-                    // raw : ${d.manufacturer_data}<br>
-                    // m : ${m}<br>
-                    // mx : ${mx}<br>
 
                     message += `
                         name : ${d.bluetooth_name}<br>
@@ -115,19 +134,58 @@
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("devicelist").innerHTML=message;
+                document.getElementById("listdevice").innerHTML=message;
+
+            } else if (type == 'start_scan_bluetooth') {
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        status : ${obj.type}<br>
+                        message : ${obj.message}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                document.getElementById("startdevice").innerHTML=message;
+
+            } else if (type == 'stop_scan_bluetooth') {
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        status : ${obj.type}<br>
+                        message : ${obj.message}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                document.getElementById("stopdevice").innerHTML=message;
+
+            } else if (type == 'disconnect_bluetooth_all') {
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        status : ${obj.type}<br>
+                        message : ${obj.message}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                document.getElementById("disconnectbluetooth").innerHTML=message;
+
+            } else if (type == 'disconnect_bluetooth_by_uuid') {
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        name : ${obj.device_name}<br>
+                        uuid : ${obj.device_uuid}<br>
+                        message : ${obj.message}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                document.getElementById("disconnectbluetoothUUID").innerHTML=message;
 
             } else if (type == 'get_service') {
                 let obj = JSON.parse(data);
                 var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
                     let a = obj.data[i];
-                    // let mfdata = 'N/A';
-                    // let m = {}, mx;
 
                     message += `
                         service : ${a}<br>
-                        data : ${data}<br>
+                        device : ${obj.device_name}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
@@ -135,121 +193,124 @@
 
             } else if (type == 'get_characteristic') {
                 let obj = JSON.parse(data);
-                var message = '123'
-                document.getElementById("test").innerHTML="testget_characteristic>>>>", data;
-                // for (let i = 0; i < obj.data.length; i++) {
-                //     let d = obj.data[i];
-                //     // let mfdata = 'N/A';
-                //     // let m = {}, mx;
-
-                //     message += `
-                //         type : ${type}<br>
-                //         characteristic : ${d}<br>
-                //         data : ${data}<br>
-                //         -----------------------------------------------------<br>
-                //     `;
-                // }
-                document.getElementById("listcharacteristic").innerHTML=message;
-
-            } else if (type == 'write_characteristic_by_uuid') {
-                alert (data)
-                document.getElementById("test").innerHTML="testwrite_characteristic_by_uuid";
-                let obj = JSON.parse(data);
                 var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
-                    let a = obj.data[i];
-                    // let mfdata = 'N/A';
-                    // let m = {}, mx;
+                let d = JSON.parse(obj.data[i])
 
                     message += `
-                        string : ${a}<br>
-                        data : ${data}<br>
+                        uuid : ${d.uuid}<br>
+                        type : ${d.type}<br>
+                        descriptors : ${d.descriptors}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
-                document.getElementById("writecharacteristic2").innerHTML=message;
-            // else if (type == 'write_characteristic') {
-            //     let obj2 = JSON.parse(data);
+                document.getElementById("listcharacteristic").innerHTML=message;
 
-            //     for (let i = 0; i < obj2.data.length; i++) {
-            //         let c = obj2.data[i];
-            //         // let mfdata = 'N/A';
-            //         // let m = {}, mx;
+            } else if (type == 'write_characteristic') {
+                // alert (data)
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        data : ${obj.data}<br>
+                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
+                        -----------------------------------------------------<br>`;
 
-            //         message4 += `
-            //             characteristic : ${c}<br>
-            //             data : ${data}<br>
-            //             name : ${c.type}<br>
-            //             uuid : ${c.service_uuid}<br>
-            //             data : ${c.data}<br>
-            //             data : ${data}<br>
-            //             -----------------------------------------------------<br>
-            //         `;
-            //     }
-            //     document.getElementById("listwrite").innerHTML=message4;
-            // }
-            // } else if (type == 'get_characteristic') {
-            //     var obj = JSON.parse(data)
-            //     var message = '<u>รายชื่อcharacteristic</u><br>'
-            //     for (var i = 0; i < obj.data.length; i += 1) {
-            //     message = message + '<p>' + obj.data[i].uuid + '(' + obj.data[i].type + ')</p>'
-            //     if (obj.data[i].type == 'read') {
-            //         uuid_characteristic_read = obj.data[i].uuid
-            //     } else if (obj.data[i].type == 'write') {
-            //         uuid_characteristic_write = obj.data[i].uuid
-            //     }
-            //     }
-            //     document.getElementById("listcharacteristic").innerHTML=message;
+                document.getElementById("write").innerHTML=message;
+        
+            } else if (type == 'write_characteristic_by_uuid') {
+                // alert (data)
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        data : ${obj.data}<br>
+                        device_name : ${obj.device_name}<br>
+			            device_uuid: ${obj.device_uuid}<br>
+                        service_uuid: ${obj.service_uuid}<br>
+                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
+                        -----------------------------------------------------<br>`;
 
-            // } else if (type == 'read_characteristic') {
-            //     alert(data)
+                document.getElementById("writeUUID").innerHTML=message;
+            
+            } else if (type == 'read_characteristic') {
+                // alert (data)
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        data : ${obj.data}<br>
+                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
+                        -----------------------------------------------------<br>`;
 
-            // } else if (type == 'write_characteristic') {
-            //     alert(data)
-            // }
-        }}
-        catch(error) {
-            alert('>>>>>>>>' + error);
+                document.getElementById("read").innerHTML=message;
+            
+            } else if (type == 'read_characteristic_by_uuid') {
+                // alert (data)
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        data : ${obj.data}<br>
+                        device_name : ${obj.device_name}<br>
+			            device_uuid: ${obj.device_uuid}<br>
+                        service_uuid: ${obj.service_uuid}<br>
+                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
+                        -----------------------------------------------------<br>`;
 
-            if (error_count == 0) {
-                alert(error);
+                document.getElementById("readUUID").innerHTML=message;
+            
             }
-            error_count++;
+        }
+        catch(error) {
+            alert('error >>>>>>>> ' + error);
         }        
     }
 
 </script>
 <body>
-    <span id="test">test</span>
-    <br>
-    <h1>
-        <a href="javascript:writeCharacteristicByUUID();">[ write ]</a>
-    </h1>
-    <br>
-        <div id="writecharacteristic2" width=300></div>
-    <br>
-    <h1>
-        <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
-    </h1>
-    <br>
-        <div id="listcharacteristic" width=300></div>
-    <br>
-    <br>
-        
-        <!-- <div id="test" width=300></div> -->
-    <br>
-    <h1>
-        <a href="javascript:getPrimaryService();">[ get service ]</a>
-    </h1>
-    <br>
-        <div id="listservice" width=300></div>
-    <br>
+    <!-- <span id="test">test</span>
+    <br> -->
     <h1>
         <a href="javascript:scanDevice();">[ scan device ]</a>
     </h1>
-    <br>
-        <div id="devicelist" width=300></div>
-    <br>
+        <div id="listdevice" width=300></div>
+    <h1>
+        <a href="javascript:scanDevice();">[ start scan device ]</a>
+    </h1>
+        <div id="startdevice" width=300></div>
+    <h1>
+        <a href="javascript:stopscanDevice();">[ stop scan device ]</a>
+    </h1>
+        <div id="stopdevice" width=300></div>
+    <h1>
+        <a href="javascript:disconnectBluetoothAll();">[ disconnect all bluetooth ]</a>
+    </h1>
+        <div id="disconnectbluetooth" width=300></div>
+    <h1>
+        <a href="javascript:disconnectBluetoothByUUID();">[ disconnect bluetooth by UUID ]</a>
+    </h1>
+        <div id="disconnectbluetoothUUID" width=300></div>
+    <h1>
+        <a href="javascript:getPrimaryService();">[ get service ]</a>
+    </h1>
+        <div id="listservice" width=300></div>
+    <h1>
+        <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
+    </h1>
+        <div id="listcharacteristic" width=300></div>
+    <h1>
+        <a href="javascript:writeCharacteristic();">[ write ]</a>
+    </h1>
+        <div id="write" width=300></div>
+    <h1>
+        <a href="javascript:writeCharacteristicByUUID();">[ write by UUID ]</a>
+    </h1>
+        <div id="writeUUID" width=300></div>
+    <h1>
+        <a href="javascript:readCharacteristic();">[ read ]</a>
+    </h1>
+        <div id="read" width=300></div>
+    <h1>
+        <a href="javascript:readCharacteristicByUUID();">[ read by UUID ]</a>
+    </h1>
+        <div id="readUUID" width=300></div>
     
 </body>
 </html>
