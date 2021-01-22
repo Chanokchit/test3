@@ -9,12 +9,29 @@
     var uuid_service = '180D'
     var uuid_characteristic_read = '2A38'
     var uuid_characteristic_write = '2A39'
-    var datawrite = 'test write text by uuid 21/01/2021 ขอบคุณค่ะ'
+    var data_type = 'hex'
+    // var datawrite = 'test write text by uuid 21/01/2021 ขอบคุณค่ะ'
+    var datawrite = '0006CC59513C4CAA6116D34BF71000B12EF8'
     
 // webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage({device_uuid:String,service_uuid:String})
 // webkit.messageHandlers.OneChat_connectServiceByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String})
 // webkit.messageHandlers.OneChat_readCharacteristicByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String,characteristic_uuid:String})
 // webkit.messageHandlers.OneChat_writeCharacteristicByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String,characteristic_uuid:String,data:String})
+
+// webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
+//     device_uuid: info.uuid,
+//     service_uuid: 'B101',
+//     characteristic_uuid: '2A04',
+//     data: '0006CC59513C4CAA6116D34BF71000B12EF8',
+//     data_type : 'hex'
+// });
+// webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
+//     device_uuid: info.uuid,
+//     service_uuid: 'B101',
+//     characteristic_uuid: '2A04',
+//     data: 'text',
+//     datatype : 'text'
+// });
 
     function scanDevice() {
         try {
@@ -68,7 +85,7 @@
     function writeCharacteristic() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite});
+            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
         } catch(error) {
             alert('writeCharacteristic ' + error)
         }
@@ -76,7 +93,7 @@
     function writeCharacteristicByUUID() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite});
+            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
         } catch(error) {
             alert('writeCharacteristicByUUID ' + error)
         }
@@ -192,17 +209,16 @@
                 document.getElementById("listservice").innerHTML=message;
 
             } else if (type == 'get_characteristic') {
-                alert (data)
-                let obj = JSON.parse(data);
-                alert (obj)
+                // let obj = JSON.parse(data);
+                // alert (obj)
                 var message = ''
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i]
-                    let obj2 = JSON.parse(d);
+                for (let i = 0; i < data.data.length; i++) {
+                    let obj = data.data[i]
+                    // let obj2 = JSON.parse(d);
                     message += `
-                        uuid : ${obj2.uuid}<br>
-                        type : ${obj2.type}<br>
-                        descriptors : ${obj2.descriptors}<br>
+                        uuid : ${obj.uuid}<br>
+                        type : ${obj.type}<br>
+                        descriptors : ${obj.descriptors}<br>
                         -----------------------------------------------------<br>
                     `;
                 }
