@@ -94,6 +94,13 @@
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
             webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
+            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device,
+                service_uuid: uuid_service,
+                characteristic_uuid: uuid_characteristic_write,
+                data: '0006CC59513C4CAA6116D34BF71000B12EF8',
+                data_type : 'hex'
+            });
         } catch(error) {
             alert('writeCharacteristicByUUID ' + error)
         }
