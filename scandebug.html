@@ -85,7 +85,10 @@
     function writeCharacteristic() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
+            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
+                uuid: uuid_characteristic_write, 
+                data: datawrite, data_type: data_type
+            });
         } catch(error) {
             alert('writeCharacteristic ' + error)
         }
@@ -93,13 +96,13 @@
     function writeCharacteristicByUUID() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
+            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_write, data: datawrite, data_type: data_type});
             webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
                 device_uuid: uuid_device,
                 service_uuid: uuid_service,
                 characteristic_uuid: uuid_characteristic_write,
-                data: '0006CC59513C4CAA6116D34BF71000B12EF8',
-                data_type : 'hex'
+                data: datawrite,
+                data_type : data_type
             });
         } catch(error) {
             alert('writeCharacteristicByUUID ' + error)
@@ -116,7 +119,11 @@
     function readCharacteristicByUUID() {
         try {
             // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
-            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_read});
+            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device, 
+                service_uuid: uuid_service, 
+                characteristic_uuid: uuid_characteristic_read
+            });
         } catch(error) {
             alert('readCharacteristicByUUID ' + error)
         }
@@ -218,18 +225,19 @@
             } else if (type == 'get_characteristic') {
                 // let obj = JSON.parse(data);
                 // alert (obj)
+                let obj = data
                 var message = ''
-                for (let i = 0; i < data.data.length; i++) {
-                    let obj = data.data[i]
+                // for (let i = 0; i < obj.data.length; i++) {
+                    let obj2 = data.data[1]
                     // let obj2 = JSON.parse(d);
-                    message += `
-                        uuid : ${obj.uuid}<br>
-                        type : ${obj.type}<br>
-                        descriptors : ${obj.descriptors}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
-                document.getElementById("listcharacteristic").innerHTML=message;
+                    // message += `
+                    //     uuid : ${obj2.uuid}<br>
+                    //     type : ${obj2.type}<br>
+                    //     descriptors : ${obj2.descriptors}<br>
+                    //     -----------------------------------------------------<br>
+                    // `;
+                // }
+                document.getElementById("listcharacteristic").innerHTML=obj2;
 
             } else if (type == 'write_characteristic') {
                 alert (data)
@@ -243,7 +251,7 @@
                 document.getElementById("write").innerHTML=message;
         
             } else if (type == 'write_characteristic_by_uuid') {
-                alert (data)
+                // alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                     message += `
