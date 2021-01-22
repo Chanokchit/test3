@@ -223,12 +223,12 @@
                 document.getElementById("listservice").innerHTML=message;
 
             } else if (type == 'get_characteristic') {
-                // let obj = JSON.parse(data);
-                // alert (obj)
-                let obj = data
-                var message = ''
+                let obj = JSON.parse(data);
+                alert (obj)
+                // let obj = data
+                // var message = ''
                 // for (let i = 0; i < obj.data.length; i++) {
-                    let obj2 = data.data[1]
+                    // let obj2 = data.data[1]
                     // let obj2 = JSON.parse(d);
                     // message += `
                     //     uuid : ${obj2.uuid}<br>
@@ -237,7 +237,7 @@
                     //     -----------------------------------------------------<br>
                     // `;
                 // }
-                document.getElementById("listcharacteristic").innerHTML=obj2;
+                document.getElementById("listcharacteristic").innerHTML=obj;
 
             } else if (type == 'write_characteristic') {
                 alert (data)
