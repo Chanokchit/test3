@@ -87,7 +87,7 @@
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
             webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
-                uuid: uuid_characteristic_write, 
+                characteristic_uuid: uuid_characteristic_write, 
                 data: datawrite, 
                 data_type: data_type
             });
@@ -99,7 +99,7 @@
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
             webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
-                uuid: uuid_characteristic_write, 
+                characteristic_uuid: uuid_characteristic_write, 
                 data: datawrite2, 
                 data_type: data_type2
             });
@@ -138,7 +138,7 @@
     function readCharacteristic() {
         try {
             // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
-            webkit.messageHandlers.OneChat_readCharacteristic.postMessage({uuid: uuid_characteristic_read});
+            webkit.messageHandlers.OneChat_readCharacteristic.postMessage(uuid_characteristic_read);
         } catch(error) {
             alert('readCharacteristic ' + error)
         }
