@@ -70,7 +70,7 @@
     function getPrimaryService() {
         try {
             // webkit.messageHandlers.OneChat_getPrimaryService.postMessage(String uuid)	
-            webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device);
+            webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage(uuid_device);
         } catch(error) {
             alert('getPrimaryService ' + error)
         }
