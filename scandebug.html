@@ -41,15 +41,15 @@
         } catch(error) {
             alert('scanDevice ' + error)
         }
-    }e
-    function stopscanDevice() {
-        try {
-            // webkit.messageHandlers.OneChat_stopScanDevice.postMessage(String Any)	
-            webkit.messageHandlers.OneChat_stopScanDevice.postMessage("Success");
-        } catch(error) {
-            alert('stop scanDevice' + error)
-        }
     }
+    // function stopscanDevice() {
+    //     try {
+    //         // webkit.messageHandlers.OneChat_stopScanDevice.postMessage(String Any)	
+    //         webkit.messageHandlers.OneChat_stopScanDevice.postMessage("Success");
+    //     } catch(error) {
+    //         alert('stop scanDevice' + error)
+    //     }
+    // }
     function disconnectBluetoothAll() {
         try {
             // webkit.messageHandlers.OneChat_disconnectBluetoothAll.postMessage(String Any)
@@ -329,9 +329,9 @@
         <a href="javascript:scanDevice();">[ start scan device ]</a>
     </h1>
         <div id="startdevice" width=300></div>
-    <h1>
+    <!-- <h1>
         <a href="javascript:stopscanDevice();">[ stop scan device ]</a>
-    </h1>
+    </h1> -->
         <div id="stopdevice" width=300></div>
     <h1>
         <a href="javascript:disconnectBluetoothAll();">[ disconnect all bluetooth ]</a>
