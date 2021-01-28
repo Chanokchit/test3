@@ -70,7 +70,7 @@
     function getPrimaryService() {
         try {
             // webkit.messageHandlers.OneChat_getPrimaryService.postMessage(String uuid)	
-            webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage(uuid_device);
+            webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device);
         } catch(error) {
             alert('getPrimaryService ' + error)
         }
@@ -78,7 +78,7 @@
     function getCharacteristic() {
         try {
             // webkit.messageHandlers.OneChat_getCharacteristic.postMessage(String uuid)
-            webkit.messageHandlers.OneChat_getCharacteristic.postMessage("180D");
+            webkit.messageHandlers.OneChat_getCharacteristic.postMessage(uuid_service);
         } catch(error) {
             alert('getCharacteristic (error)' + error)
         }
