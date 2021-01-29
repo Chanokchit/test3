@@ -15,7 +15,7 @@
     var data_type = 'hex'
     var data_type2 = 'text'
     var datawrite = '0006CC59513C4CAA6116D34BF71000B12EF8'
-    var datawrite2 = 'test write text by uuid 21/01/2021 ขอบคุณค่ะ'
+    var datawrite2 = 'test write text by uuid 29/01/2021 ขอบคุณค่ะ'
 
 // webkit.messageHandlers.OneChat_connectServiceByUUID.postMessage({device_uuid:String,service_uuid:String})
 // webkit.messageHandlers.OneChat_connectServiceByManufacturerData.postMessage({manufacturer_data:String,service_uuid:String})
@@ -94,18 +94,18 @@
             alert('getCharacteristic (error)' + error)
         }
     }
-    // function writeCharacteristic() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
-    //         webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
-    //             characteristic_uuid: uuid_characteristic_write, 
-    //             data: datawrite, 
-    //             data_type: data_type
-    //         });
-    //     } catch(error) {
-    //         alert('writeCharacteristic ' + error)
-    //     }
-    // }
+    function writeCharacteristic() {
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
+                characteristic_uuid: uuid_characteristic_write, 
+                data: datawrite, 
+                data_type: data_type
+            });
+        } catch(error) {
+            alert('writeCharacteristic ' + error)
+        }
+    }
     function writeCharacteristic2() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
@@ -125,8 +125,8 @@
                 device_uuid: uuid_device,
                 service_uuid: uuid_service,
                 characteristic_uuid: uuid_characteristic_write,
-                data: datawrite2,
-                data_type : data_type2
+                data: datawrite,
+                data_type : data_type
             });
         } catch(error) {
             alert('writeCharacteristicByUUID ' + error)
@@ -146,20 +146,20 @@
     //         alert('writeCharacteristicByUUID ' + error)
     //     }
     // }
-    // function writeCharacteristicByUUID2() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
-    //         webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
-    //             device_uuid: uuid_device,
-    //             service_uuid: uuid_service,
-    //             characteristic_uuid: uuid_characteristic_write,
-    //             data: datawrite2,
-    //             data_type : data_type2
-    //         });
-    //     } catch(error) {
-    //         alert('writeCharacteristicByUUID 2' + error)
-    //     }
-    // }
+    function writeCharacteristicByUUID2() {
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device,
+                service_uuid: uuid_service,
+                characteristic_uuid: uuid_characteristic_write,
+                data: datawrite2,
+                data_type : data_type2
+            });
+        } catch(error) {
+            alert('writeCharacteristicByUUID 2' + error)
+        }
+    }
     function readCharacteristic() {
         try {
             // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
@@ -168,18 +168,18 @@
             alert('readCharacteristic ' + error)
         }
     }
-    // function readCharacteristicByUUID() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
-    //         webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
-    //             device_uuid: uuid_device, 
-    //             service_uuid: uuid_service, 
-    //             characteristic_uuid: uuid_characteristic_read
-    //         });
-    //     } catch(error) {
-    //         alert('readCharacteristicByUUID ' + error)
-    //     }
-    // }
+    function readCharacteristicByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
+            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device, 
+                service_uuid: uuid_service, 
+                characteristic_uuid: uuid_characteristic_read
+            });
+        } catch(error) {
+            alert('readCharacteristicByUUID ' + error)
+        }
+    }
 
 
     function oneChatBluetoothCallBackData(type, data) {
@@ -382,31 +382,32 @@
         <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
     </h1>
         <div id="listcharacteristic" width=300></div>
-    <!-- <h1>
+    <h1>
         <a href="javascript:writeCharacteristic();">[ write "HEX" ]</a>
-    </h1> -->
+    </h1>
+        <!-- <div id="write" width=300></div> -->
     <h1>
         <a href="javascript:writeCharacteristic2();">[ write "TEXT" ]</a>
     </h1>
         <div id="write" width=300></div>
     <h1>
-        <a href="javascript:writeCharacteristicByUUID();">[ write "TEXT" by UUID ]</a>
+        <a href="javascript:writeCharacteristicByUUID();">[ write "HEX" by UUID ]</a>
     </h1>
     <!-- <h1>
         <a href="javascript:writeCharacteristicByUUID_2();">[ write "HEX" by UUID2 ]</a>
-    </h1>
+    </h1> -->
     <h1>
         <a href="javascript:writeCharacteristicByUUID2();">[ write "TEXT" by UUID ]</a>
-    </h1> -->
+    </h1>
         <div id="writeUUID" width=300></div>
     <h1>
         <a href="javascript:readCharacteristic();">[ read ]</a>
     </h1>
         <div id="read" width=300></div>
-    <!-- <h1>
+    <h1>
         <a href="javascript:readCharacteristicByUUID();">[ read by UUID ]</a>
     </h1>
-        <div id="readUUID" width=300></div> -->
+        <div id="readUUID" width=300></div>
     
 </body>
 </html>
