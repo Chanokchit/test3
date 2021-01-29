@@ -130,6 +130,20 @@
             alert('writeCharacteristicByUUID ' + error)
         }
     }
+    function writeCharacteristicByUUID_2() {
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device2,
+                service_uuid: uuid_service,
+                characteristic_uuid: uuid_characteristic_write,
+                data: datawrite,
+                data_type : data_type
+            });
+        } catch(error) {
+            alert('writeCharacteristicByUUID ' + error)
+        }
+    }
     function writeCharacteristicByUUID2() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
@@ -375,6 +389,9 @@
         <div id="write" width=300></div>
     <h1>
         <a href="javascript:writeCharacteristicByUUID();">[ write "HEX" by UUID ]</a>
+    </h1>
+    <h1>
+        <a href="javascript:writeCharacteristicByUUID_2();">[ write "HEX" by UUID2 ]</a>
     </h1>
     <h1>
         <a href="javascript:writeCharacteristicByUUID2();">[ write "TEXT" by UUID ]</a>
