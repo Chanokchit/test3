@@ -160,14 +160,14 @@
     //         alert('writeCharacteristicByUUID 2' + error)
     //     }
     // }
-    // function readCharacteristic() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
-    //         webkit.messageHandlers.OneChat_readCharacteristic.postMessage(uuid_characteristic_read);
-    //     } catch(error) {
-    //         alert('readCharacteristic ' + error)
-    //     }
-    // }
+    function readCharacteristic() {
+        try {
+            // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
+            webkit.messageHandlers.OneChat_readCharacteristic.postMessage(uuid_characteristic_read);
+        } catch(error) {
+            alert('readCharacteristic ' + error)
+        }
+    }
     // function readCharacteristicByUUID() {
     //     try {
     //         // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
@@ -399,11 +399,11 @@
         <a href="javascript:writeCharacteristicByUUID2();">[ write "TEXT" by UUID ]</a>
     </h1> -->
         <div id="writeUUID" width=300></div>
-    <!-- <h1>
+    <h1>
         <a href="javascript:readCharacteristic();">[ read ]</a>
     </h1>
         <div id="read" width=300></div>
-    <h1>
+    <!-- <h1>
         <a href="javascript:readCharacteristicByUUID();">[ read by UUID ]</a>
     </h1>
         <div id="readUUID" width=300></div> -->
