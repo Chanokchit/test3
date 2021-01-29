@@ -6,9 +6,10 @@
     let time_scan = 5000;
     // let error_count = 0;
     var uuid_device = '54F888C9-EFEF-68D2-B21D-A730AC675099'
-    var uuid_service = '1111'
+    var uuid_device2 = '42B66A6C-0F1E-51EC-99B4-F6952B3B2412'
+    var uuid_service = '180D'
     var uuid_characteristic_read = '2A38'
-    var uuid_characteristic_write = '2222'
+    var uuid_characteristic_write = '2A39'
     var data_type = 'hex'
     var data_type2 = 'text'
     var datawrite = '0006CC59513C4CAA6116D34BF71000B12EF8'
@@ -73,6 +74,14 @@
             webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device);
         } catch(error) {
             alert('getPrimaryService ' + error)
+        }
+    }
+    function getPrimaryService2() {
+        try {
+            // webkit.messageHandlers.OneChat_getPrimaryService.postMessage(String uuid)	
+            webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device2);
+        } catch(error) {
+            alert('getPrimaryService2 ' + error)
         }
     }
     function getCharacteristic() {
@@ -347,6 +356,10 @@
         <div id="listdevice" width=300></div>
     <h1>
         <a href="javascript:getPrimaryService();">[ get service ]</a>
+    </h1>
+        <div id="listservice" width=300></div>
+    <h1>
+        <a href="javascript:getPrimaryService2();">[ get service2 ]</a>
     </h1>
         <div id="listservice" width=300></div>
     <h1>
