@@ -125,8 +125,8 @@
                 device_uuid: uuid_device,
                 service_uuid: uuid_service,
                 characteristic_uuid: uuid_characteristic_write,
-                data: datawrite,
-                data_type : data_type
+                data: datawrite2,
+                data_type : data_type2
             });
         } catch(error) {
             alert('writeCharacteristicByUUID ' + error)
@@ -390,7 +390,7 @@
     </h1>
         <div id="write" width=300></div> -->
     <h1>
-        <a href="javascript:writeCharacteristicByUUID();">[ write "HEX" by UUID ]</a>
+        <a href="javascript:writeCharacteristicByUUID();">[ write "TEXT" by UUID ]</a>
     </h1>
     <!-- <h1>
         <a href="javascript:writeCharacteristicByUUID_2();">[ write "HEX" by UUID2 ]</a>
