@@ -106,18 +106,18 @@
     //         alert('writeCharacteristic ' + error)
     //     }
     // }
-    // function writeCharacteristic2() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
-    //         webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
-    //             characteristic_uuid: uuid_characteristic_write, 
-    //             data: datawrite2, 
-    //             data_type: data_type2
-    //         });
-    //     } catch(error) {
-    //         alert('writeCharacteristic 2' + error)
-    //     }
-    // }
+    function writeCharacteristic2() {
+        try {
+            // webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({uuid:String, data:String})
+            webkit.messageHandlers.OneChat_writeCharacteristic.postMessage({
+                characteristic_uuid: uuid_characteristic_write, 
+                data: datawrite2, 
+                data_type: data_type2
+            });
+        } catch(error) {
+            alert('writeCharacteristic 2' + error)
+        }
+    }
     function writeCharacteristicByUUID() {
         try {
             // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
@@ -384,11 +384,11 @@
         <div id="listcharacteristic" width=300></div>
     <!-- <h1>
         <a href="javascript:writeCharacteristic();">[ write "HEX" ]</a>
-    </h1>
+    </h1> -->
     <h1>
         <a href="javascript:writeCharacteristic2();">[ write "TEXT" ]</a>
     </h1>
-        <div id="write" width=300></div> -->
+        <div id="write" width=300></div>
     <h1>
         <a href="javascript:writeCharacteristicByUUID();">[ write "TEXT" by UUID ]</a>
     </h1>
