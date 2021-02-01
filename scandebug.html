@@ -45,14 +45,14 @@
             alert('scanDevice ' + error)
         }
     }
-    // function stopscanDevice() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_stopScanDevice.postMessage(String Any)	
-    //         webkit.messageHandlers.OneChat_stopScanDevice.postMessage("Success");
-    //     } catch(error) {
-    //         alert('stop scanDevice' + error)
-    //     }
-    // }
+    function stopscanDevice() {
+        try {
+            // webkit.messageHandlers.OneChat_stopScanDevice.postMessage(String Any)	
+            webkit.messageHandlers.OneChat_stopScanDevice.postMessage("Success disconnect");
+        } catch(error) {
+            alert('stop scanDevice' + error)
+        }
+    }
     // function disconnectBluetoothAll() {
     //     try {
     //         // webkit.messageHandlers.OneChat_disconnectBluetoothAll.postMessage(String Any)
@@ -229,15 +229,16 @@
                     `;
                 document.getElementById("startdevice").innerHTML=message;
 
-            // } else if (type == 'stop_scan_bluetooth') {
-            //     let obj = JSON.parse(data);
-            //     var message = ''
-            //         message += `
-            //             status : ${obj.type}<br>
-            //             message : ${obj.message}<br>
-            //             -----------------------------------------------------<br>
-            //         `;
-            //     document.getElementById("stopdevice").innerHTML=message;
+            } else if (type == 'stop_scan_bluetooth') {
+                alert (data)
+                let obj = JSON.parse(data);
+                var message = ''
+                    message += `
+                        status : ${obj.type}<br>
+                        message : ${obj.message}<br>
+                        -----------------------------------------------------<br>
+                    `;
+                document.getElementById("stopdevice").innerHTML=message;
 
             } else if (type == 'disconnect_bluetooth_all') {
                 let obj = JSON.parse(data);
@@ -354,10 +355,10 @@
         <a href="javascript:scanDevice();">[ start scan device ]</a>
     </h1>
         <div id="startdevice" width=300></div>
-    <!-- <h1>
+    <h1>
         <a href="javascript:stopscanDevice();">[ stop scan device ]</a>
-    </h1> -->
-        <!-- <div id="stopdevice" width=300></div> -->
+    </h1>
+        <div id="stopdevice" width=300></div>
     <!-- <h1>
         <a href="javascript:disconnectBluetoothAll();">[ disconnect all bluetooth ]</a>
     </h1>
