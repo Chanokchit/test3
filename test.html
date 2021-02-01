@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Access a JSON object using bracket notation:</p>
+
+<p id="demo"></p>
+
+<script>
+var myObj, x, obj; 
+
+myObj = {"data" : [{"name":"John", "age":30, "car":null},{"name":"John2", "age":30, "car":null},{"name":"John3", "age":30, "car":null}]};
+obj = JSON.parse(data);
+x = myObj.data[1];
+
+document.getElementById("demo").innerHTML = x.name;
+//document.getElementById("demo").innerHTML = obj.data;
+</script>
+
+</body>
+</html>
