@@ -141,6 +141,7 @@ function oneChatBluetoothCallBackData(type, data) {
           message = message + '<p>' + obj.data[i].uuid + '(' + obj.data[i].type + ')</p>'
           if (obj.data[i].type == 'read') {
             uuid_characteristic_read = obj.data[i].uuid
+            alert (uuid_characteristic_read)
           } else if (obj.data[i].type == 'write') {
             uuid_characteristic_write = obj.data[i].uuid
           }
