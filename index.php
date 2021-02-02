@@ -1,1 +1,1 @@
-<?php header( 'Location: /testwebBluetooth.html' ) ; ?>
+<?php header( 'Location: /scandebug.html' ) ; ?>
