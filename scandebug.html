@@ -48,9 +48,11 @@
             }
             if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
             //   document.getElementById("data").innerHTML= "ios";
-                return "ios";
+            alert ("ios")    
+            return "ios";
             }
             // document.getElementById("data").innerHTML= "unknown";
+            alert ("unknown") 
             return "unknown";
             }
     function scanDevice() {
