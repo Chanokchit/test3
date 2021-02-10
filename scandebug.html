@@ -186,27 +186,27 @@
             alert('readCharacteristic ' + error)
         }
     }
-    function OneChat_readCharacteristicByUUID (device_uuid, service_uuid, characteristic_uuid) {
-      try {
-        if (checkuserAgent() == 'ios') {
-          webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_read});
-        }
-      } catch(error) {
-        alert('readCharacteristicByUUID ' + error)
-      }
-    }
-    // function readCharacteristicByUUID() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
-    //         webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
-    //             device_uuid: uuid_device, 
-    //             service_uuid: uuid_service, 
-    //             characteristic_uuid: uuid_characteristic_read
-    //         });
-    //     } catch(error) {
-    //         alert('readCharacteristicByUUID ' + error)
+    // function OneChat_readCharacteristicByUUID (device_uuid, service_uuid, characteristic_uuid) {
+    //   try {
+    //     if (checkuserAgent() == 'ios') {
+    //       webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid: uuid_device, service_uuid: uuid_service, characteristic_uuid: uuid_characteristic_read});
     //     }
+    //   } catch(error) {
+    //     alert('readCharacteristicByUUID ' + error)
+    //   }
     // }
+    function OneChat_readCharacteristicByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
+            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
+                device_uuid: uuid_device, 
+                service_uuid: uuid_service, 
+                characteristic_uuid: uuid_characteristic_read
+            });
+        } catch(error) {
+            alert('readCharacteristicByUUID ' + error)
+        }
+    }
 
 
     function oneChatBluetoothCallBackData(type, data) {
