@@ -179,9 +179,12 @@
         }
     }
     function readCharacteristic() {
+        alert ('test')
         try {
             // webkit.messageHandlers.OneChat_readCharacteristic.postMessage(String String)
             webkit.messageHandlers.OneChat_readCharacteristic.postMessage(uuid_characteristic_read);
+            alert (data)
+            alert ('test2')
         } catch(error) {
             alert('readCharacteristic ' + error)
         }
@@ -196,6 +199,7 @@
     //   }
     // }
     function OneChat_readCharacteristicByUUID() {
+        alert ('test')
         try {
             // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
             webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
@@ -203,6 +207,8 @@
                 service_uuid: uuid_service, 
                 characteristic_uuid: uuid_characteristic_read
             });
+            alert (data)
+            alert ('test2')
         } catch(error) {
             alert('readCharacteristicByUUID ' + error)
         }
