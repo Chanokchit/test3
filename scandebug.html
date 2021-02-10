@@ -36,7 +36,23 @@
 //     data: 'text',
 //     datatype : 'text'
 // });
-
+    function checkuserAgent () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/windows phone/i.test(userAgent)) {
+        //   document.getElementById("data").innerHTML= "windows_phone";
+                return "windows_phone";
+            }
+            if (/android/i.test(userAgent)) {
+            //   document.getElementById("data").innerHTML= "android";
+                return "android";
+            }
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            //   document.getElementById("data").innerHTML= "ios";
+                return "ios";
+            }
+            // document.getElementById("data").innerHTML= "unknown";
+            return "unknown";
+            }
     function scanDevice() {
         try {
             // webkit.messageHandlers.OneChat_scanDevice.postMessage(Int timeout_scan)	
@@ -340,7 +356,38 @@
 
                 document.getElementById("readUUID").innerHTML=message;
             
-            }
+                type = get_characteristic
+data = {
+			"type": "get_characteristic",
+			"device_name": String,
+			"device_uuid": String,
+            "service_uuid": String,
+            "data": [
+                {
+                "uuid": String, 
+                "type": String("read"/"write"), 
+                "descriptors": String
+                }
+            ]
+}
+
+
+type = get_characteristic
+data = {
+			"type": "get_characteristic",
+			"device_name": String,
+			"device_uuid": String,
+            "service_uuid": String,
+            "data": [
+                {
+                "uuid": String, 
+                "type": String("read”"/"write"), 
+                "descriptors": String
+                }
+            ]
+}
+
+}
         }
         catch(error) {
             alert('error >>>>>>>> ' + error);
@@ -349,6 +396,11 @@
 
 </script>
 <body>
+    <h1>
+        <a href="javascript:checkuserAgent();">[ checkuserAgent ]</a>
+    </h1>
+        <div id="checkuser" width=300></div>
+    
     <!-- <span id="test">test</span>
     <br> -->
     <h1>
