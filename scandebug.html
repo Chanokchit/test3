@@ -9,8 +9,8 @@
     // var uuid_device = '54F888C9-EFEF-68D2-B21D-A730AC675099'
     var uuid_device = '46B314E5-E9DF-2D51-D524-06B718D02025' // A658ED45-BA23-BE46-5482-E1B5205D922A
     var uuid_device2 = 'A25692B2-5EF3-0C47-90F3-36391CA3CB53'
-    var uuid_service = 'AB10'
-    var uuid_characteristic_read = 'AA11'
+    var uuid_service = '180D' //AB10
+    var uuid_characteristic_read = '2A38' //AA11
     var uuid_characteristic_write = '2A39'
     var data_type = 'hex'
     var data_type2 = 'text'
@@ -368,37 +368,6 @@
                         -----------------------------------------------------<br>`;
 
                 document.getElementById("readUUID").innerHTML=message;
-            
-                type = get_characteristic
-data = {
-			"type": "get_characteristic",
-			"device_name": String,
-			"device_uuid": String,
-            "service_uuid": String,
-            "data": [
-                {
-                "uuid": String, 
-                "type": String("read"/"write"), 
-                "descriptors": String
-                }
-            ]
-}
-
-
-type = get_characteristic
-data = {
-			"type": "get_characteristic",
-			"device_name": String,
-			"device_uuid": String,
-            "service_uuid": String,
-            "data": [
-                {
-                "uuid": String, 
-                "type": String("read”"/"write"), 
-                "descriptors": String
-                }
-            ]
-}
 
 }
         }
