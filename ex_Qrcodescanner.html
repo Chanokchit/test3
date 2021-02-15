@@ -7,11 +7,29 @@
     function oneChatCallBackQRScanner(val) {
       document.getElementById("dataQrcode").innerHTML=val;
     }
+    function checkuserAgent () {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/windows phone/i.test(userAgent)) {
+          document.getElementById("data").innerHTML= "windows_phone";
+                return "windows_phone";
+            }
+            if (/android/i.test(userAgent)) {
+              document.getElementById("data").innerHTML= "android";
+                return "android";
+            }
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+              document.getElementById("data").innerHTML= "ios";
+                return "ios";
+            }
+            document.getElementById("data").innerHTML= "unknown";
+            return "unknown";
+            }
 
 </script>
 <body>
   version 1.4
-
+<a href="https://chat-develop.one.th/static/javascript/v1/onechat_bluetooth.js" target="_blank">CheckuserAgent</a>
+<span id="data"></span>
 <a href="https://chat-api.one.th/go_api/api/v1/openScanQRcodeWithValue" target="_blank">open qrcode</a>
 <span id="dataQrcode"></span>
 
