@@ -1,1 +1,1 @@
-<?php header( 'Location: /padlock.html' ) ; ?>
+<?php header( 'Location: /scandebug.html' ) ; ?>

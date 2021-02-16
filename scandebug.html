@@ -79,14 +79,14 @@
     //         alert('disconnectBluetoothAll ' + error)
     //     }
     // }
-    // function disconnectBluetoothByUUID() {
-    //     try {
-    //         // webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(String uuid)	
-    //         webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(uuid_device);
-    //     } catch(error) {
-    //         alert('disconnectBluetoothByUUID' + error)
-    //     }
-    // }
+    function disconnectBluetoothByUUID() {
+        try {
+            // webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(String uuid)	
+            webkit.messageHandlers.OneChat_disconnectBluetoothByUUID.postMessage(uuid_device);
+        } catch(error) {
+            alert('disconnectBluetoothByUUID' + error)
+        }
+    }
     
     function getPrimaryService() {
         try {
@@ -396,11 +396,11 @@
     <!-- <h1>
         <a href="javascript:disconnectBluetoothAll();">[ disconnect all bluetooth ]</a>
     </h1>
-        <div id="disconnectbluetooth" width=300></div>
+        <div id="disconnectbluetooth" width=300></div> -->
     <h1>
         <a href="javascript:disconnectBluetoothByUUID();">[ disconnect bluetooth by UUID ]</a>
     </h1>
-        <div id="disconnectbluetoothUUID" width=300></div> -->
+        <div id="disconnectbluetoothUUID" width=300></div>
     <h1>
         <a href="javascript:scanDevice();">[ scan device ]</a>
     </h1>
