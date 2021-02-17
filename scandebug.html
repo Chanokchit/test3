@@ -267,7 +267,7 @@
 
     function oneChatBluetoothCallBackData(type, data) {
         try {
-            alert (type)
+            // alert (type)
             if (type == 'get_device_service') {
                 alert (data)
                 let obj = JSON.parse(data);
@@ -293,14 +293,14 @@
                 //         }
                 //     }
 
-                    message += `
-                        name : ${d.bluetooth_name}<br>
-                        uuid : ${d.uuid}<br>
-                        manufacturer_data : ${mfdata}<br>
-                        state : ${d.state}<br>
-                        rssi : ${d.rssi}<br>
-                        -----------------------------------------------------<br>
-                    `;
+                    // message += `
+                    //     name : ${d.bluetooth_name}<br>
+                    //     uuid : ${d.uuid}<br>
+                    //     manufacturer_data : ${mfdata}<br>
+                    //     state : ${d.state}<br>
+                    //     rssi : ${d.rssi}<br>
+                    //     -----------------------------------------------------<br>
+                    // `;
                 // }
                 document.getElementById("listdevice").innerHTML=message;
 
