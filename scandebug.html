@@ -271,27 +271,27 @@
             if (type == 'get_device_service') {
                 alert (data)
                 let obj = JSON.parse(data);
-                var message = ''
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i];
-                    let mfdata = 'N/A';
-                    let m = {}, mx;
-                    if (d.manufacturer_data) {
-                        try {
-                            mx = d.manufacturer_data.replace(/[{} ]/g,'');
-                            let arr= mx.split(',');
-                            for (let c of arr) {
-                                let b = c.split('=');
-                                m[b[0]] = b[1];
-                            }
-                            if (m) {
-                                mfdata = m.bytes;
-                            } 
-                        }
-                        catch(e) {
-                            m = 'error'
-                        }
-                    }
+                var message = obj
+                // for (let i = 0; i < obj.data.length; i++) {
+                //     let d = obj.data[i];
+                //     let mfdata = 'N/A';
+                //     let m = {}, mx;
+                //     if (d.manufacturer_data) {
+                //         try {
+                //             mx = d.manufacturer_data.replace(/[{} ]/g,'');
+                //             let arr= mx.split(',');
+                //             for (let c of arr) {
+                //                 let b = c.split('=');
+                //                 m[b[0]] = b[1];
+                //             }
+                //             if (m) {
+                //                 mfdata = m.bytes;
+                //             } 
+                //         }
+                //         catch(e) {
+                //             m = 'error'
+                //         }
+                //     }
 
                     message += `
                         name : ${d.bluetooth_name}<br>
@@ -301,7 +301,7 @@
                         rssi : ${d.rssi}<br>
                         -----------------------------------------------------<br>
                     `;
-                }
+                // }
                 document.getElementById("listdevice").innerHTML=message;
 
             } else if (type == 'start_scan_bluetooth') {
