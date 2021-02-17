@@ -39,6 +39,7 @@
 //     datatype : 'text'
 // });
     function checkuserAgent () {
+        
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
         if (/windows phone/i.test(userAgent)) {
         //   document.getElementById("data").innerHTML= "windows_phone";
@@ -46,6 +47,7 @@
             }
             if (/android/i.test(userAgent)) {
             //   document.getElementById("data").innerHTML= "android";
+                alert ("android") 
                 return "android";
             }
             if (/Macintosh|iPhone|iPod/.test(userAgent) && !window.MSStream) {
@@ -266,6 +268,7 @@
         try {
             // alert (type)
             if (type == 'get_device_service') {
+                alert (data)
                 let obj = JSON.parse(data);
                 var message = ''
                 for (let i = 0; i < obj.data.length; i++) {
