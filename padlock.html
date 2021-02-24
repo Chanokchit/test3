@@ -9,13 +9,15 @@
     let device_uuid = '';
     let num = '';
     // var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
-    // var uuid_service = 'ffd5'
-    // var uuid_characteristic_read = '2A38'
-    // var uuid_characteristic_write = 'ffd9'
+    var service_uuid = 'FFD5'
+    var characteristic_uuid = 'FFD9'
+    var data_1 = '2905050505050528'
+    var data_2 = 'FE4F50454E00000000FD'
+    // var uuid_characteristic_write = characteristic_uuid
     // var data_type = 'hex'
     // var data_type2 = 'text'
     // var datawrite = '2901010101010128'
-    // var datawrite2 = 'fe4f50454e00000000fd'
+    // var datawrite2 = data_2
 
     function logtoHTML(input, header = ''){
 
@@ -42,14 +44,14 @@
           try {
               num = 1;
               OneChat_scanDevice(time_scan);
-            //   OneChat_connectServiceByUUID(device_uuid, 'FFD5')
+            //   OneChat_connectServiceByUUID(device_uuid, service_uuid)
               setTimeout(() => {
                         logtoHTML('1>>>>' + device_uuid);
-                        OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
+                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_1, 'hex');
                         
                         setTimeout(() => {
                         logtoHTML('2>>>>' + device_uuid);
-                        OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
+                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
                                   }, 8000);
                         }, 8000);
           }
@@ -61,7 +63,7 @@
           try {
               num = 2;
               OneChat_scanDevice(time_scan);
-              OneChat_connectServiceByUUID(device_uuid, 'FFD5')
+              OneChat_connectServiceByUUID(device_uuid, service_uuid)
           }
           catch(error) {
         	    alert('scanDevice ' + error);
@@ -74,7 +76,7 @@
                 OneChat_scanDevice(time_scan);
 
                 logtoHTML('1>>>>' + device_uuid);
-                OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
+                OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_1, 'hex');
                         // }, 8000);
           }
           catch(error) {
@@ -85,7 +87,7 @@
           try {
             // setTimeout(() => {
                 logtoHTML('2>>>>' + device_uuid);
-                OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
+                OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
                         // }, 8000);
           }
           catch(error) {
@@ -96,7 +98,7 @@
           try {
             // setTimeout(() => {
                 logtoHTML('1 >>>>' + device_uuid);
-                OneChat_writeCharacteristic('FFD9', '2905050505050528', 'hex')
+                OneChat_writeCharacteristic(characteristic_uuid, data_1, 'hex')
                         // }, 8000);
           }
           catch(error) {
@@ -107,7 +109,7 @@
           try {
             // setTimeout(() => {
                 logtoHTML('2 >>>>' + device_uuid);
-                OneChat_writeCharacteristic('FFD9', 'FE4F50454E00000000FD', 'hex')
+                OneChat_writeCharacteristic(characteristic_uuid, data_2, 'hex')
                         // }, 8000);
           }
           catch(error) {
@@ -149,7 +151,7 @@
                     logtoHTML('service uuid >>>>>>' + d);
                     for (let i = 0; i < d.length; i++) {
                         let obj = d[i];
-                        if (obj == 'FFD5') {
+                        if (obj == service_uuid) {
                             OneChat_getCharacteristic(obj) 
                             logtoHTML('service uuid >>>>>>' + obj);
                         }
@@ -179,7 +181,7 @@
                         logtoHTML('character >>>> ' + d.characteristic_uuid )
                         logtoHTML('data >>>> ' + d.data )
 
-                        if (d.data == 'FE4F50454E00000000FD') {
+                        if (d.data == data_2) {
                             setTimeout(() => {
                                 OneChat_disconnectBluetoothByUUID(d.device_uuid);
                                 logtoHTML("disconnecting...");
@@ -194,7 +196,7 @@
                         logtoHTML('character >>>> ' + a.characteristic_uuid )
                         logtoHTML('data >>>> ' + a.data )
 
-                        if (a.data == 'FE4F50454E00000000FD') {
+                        if (a.data == data_2) {
                             setTimeout(() => {
                                 OneChat_disconnectBluetoothByUUID(device_uuid);
                                 logtoHTML("disconnecting...");
