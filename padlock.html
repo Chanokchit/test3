@@ -7,6 +7,7 @@
 
     let time_scan = 10000;
     let device_uuid = '';
+    let num = '';
     // var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
     // var uuid_service = 'ffd5'
     // var uuid_characteristic_read = '2A38'
@@ -39,23 +40,48 @@
 
     function scanDevice() {
           try {
+              num = 1;
               OneChat_scanDevice(time_scan);
             //   OneChat_connectServiceByUUID(device_uuid, 'FFD5')
-            //   setTimeout(() => {
-            //             logtoHTML('1>>>>' + device_uuid);
-            //             OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
+              setTimeout(() => {
+                        logtoHTML('1>>>>' + device_uuid);
+                        OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
                         
-                        // setTimeout(() => {
-                        // logtoHTML('2>>>>' + device_uuid);
-                        // OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
-                        //           }, 8000);
-                        // }, 8000);
+                        setTimeout(() => {
+                        logtoHTML('2>>>>' + device_uuid);
+                        OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
+                                  }, 8000);
+                        }, 8000);
           }
           catch(error) {
         	    alert('scanDevice ' + error);
           }
       }
-    function write2() {
+      function scanDevice2() {
+          try {
+              num = 2;
+              OneChat_scanDevice(time_scan);
+              OneChat_connectServiceByUUID(device_uuid, 'FFD5')
+          }
+          catch(error) {
+        	    alert('scanDevice ' + error);
+          }
+      }
+      function writepassword_uuid() {
+          try {
+            // setTimeout(() => {
+                num = 1;
+                OneChat_scanDevice(time_scan);
+
+                logtoHTML('1>>>>' + device_uuid);
+                OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
+                        // }, 8000);
+          }
+          catch(error) {
+        	    alert('write ' + error);
+          }
+      }
+      function writepassword_uuid2() {
           try {
             // setTimeout(() => {
                 logtoHTML('2>>>>' + device_uuid);
@@ -66,10 +92,10 @@
         	    alert('write ' + error);
           }
       }
-      function write3() {
+      function write1() {
           try {
             // setTimeout(() => {
-                logtoHTML('3>>>>' + device_uuid);
+                logtoHTML('1 >>>>' + device_uuid);
                 OneChat_writeCharacteristic('FFD9', '2905050505050528', 'hex')
                         // }, 8000);
           }
@@ -77,10 +103,10 @@
         	    alert('write ' + error);
           }
       }
-      function write4() {
+      function write2() {
           try {
             // setTimeout(() => {
-                logtoHTML('4>>>>' + device_uuid);
+                logtoHTML('2 >>>>' + device_uuid);
                 OneChat_writeCharacteristic('FFD9', 'FE4F50454E00000000FD', 'hex')
                         // }, 8000);
           }
@@ -111,7 +137,10 @@
                     if (d.bluetooth_name == 'LOCK-10082C3FA29C') {
                         let uuid = d.uuid
                         device_uuid = uuid
-                        OneChat_getPrimaryService(device_uuid)
+                        if (num == 2){
+                            OneChat_getPrimaryService(device_uuid)
+                        }
+                        logtoHTML('num >>>>' + num);
                         OneChat_stopScanDevice();
                     }
 
@@ -141,7 +170,7 @@
                     
 
             } else if (type == 'write_characteristic_by_uuid') {
-                logtoHTML('write');
+                logtoHTML('write by uuid');
                 let d = data
                 if (d) {
 
@@ -186,16 +215,25 @@
 <body>
 
     <h1>
-        <a href="javascript:scanDevice();">[ Open padlock ]</a>
+        1. >>> <a href="javascript:scanDevice();">[ Open padlock -- write characteristic_uuid ]</a>
+    </h1>
+    ---------------------------------------------------------------------------------------
+    <h1>
+        2.1 >>> <a href="javascript:scanDevice2();">[ scan device ]</a>
+    </h1>
+    
+    <h1>
+        2.2 >>> <a href="javascript:write1();">[ write data 1 ]</a>
     </h1>
     <h1>
-        <a href="javascript:write2();">[ password ]</a>
+        2.3 >>> <a href="javascript:write2();">[ write data 2 ]</a>
+    </h1>
+    ---------------------------------------------------------------------------------------
+    <h1>
+        3.1 >>> <a href="javascript:writepassword_uuid();">[ write by uuid data 1 ]</a>
     </h1>
     <h1>
-        <a href="javascript:write3();">[ write1 ]</a>
-    </h1>
-    <h1>
-        <a href="javascript:write4();">[ write2 ]</a>
+        3.1 >>> <a href="javascript:writepassword_uuid2();">[ write by uuid data 2 ]</a>
     </h1>
     <div id="devicelist" width=300></div>
     
