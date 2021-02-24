@@ -1,231 +1,203 @@
 <html lang="th">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="https://chat-develop.one.th/static/javascript/v1/onechat_bluetooth.js"></script>
 </head>
 <script type="text/javascript">
 
-    let time_scan = 5000;
-    var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
-    var uuid_service = 'ffd5'
-    var uuid_characteristic_read = '2A38'
-    var uuid_characteristic_write = 'ffd9'
-    var data_type = 'hex'
-    var data_type2 = 'text'
-    var datawrite = '2901010101010128'
-    var datawrite2 = 'fe4f50454e00000000fd'
+    let time_scan = 10000;
+    let device_uuid = '';
+    // var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
+    // var uuid_service = 'ffd5'
+    // var uuid_characteristic_read = '2A38'
+    // var uuid_characteristic_write = 'ffd9'
+    // var data_type = 'hex'
+    // var data_type2 = 'text'
+    // var datawrite = '2901010101010128'
+    // var datawrite2 = 'fe4f50454e00000000fd'
+
+    function logtoHTML(input, header = ''){
+
+    let out = input;
+    if (typeof(input) == 'object') {
+      try {
+          out =  JSON.stringify(input, undefined, 4);
+      }
+      catch(e) {
+          alert(e);
+      }
+    }
+
+    let debugbox = document.getElementById("devicelist");
+    if (debugbox) {
+      if (header) {
+          header = ' '+header+' ';
+      }
+      debugbox.innerHTML = out + '<br>---'+ header +'-------------------------<br>' + document.getElementById("devicelist").innerHTML;
+    }
+}
 
     function scanDevice() {
-        try {
-            // webkit.messageHandlers.OneChat_scanDevice.postMessage(Int timeout_scan)	
-            webkit.messageHandlers.OneChat_scanDevice.postMessage(time_scan);
-        } catch(error) {
-            alert('scanDevice ' + error)
-        }
-    }
-    function getPrimaryService() {
-        try {
-            // webkit.messageHandlers.OneChat_getPrimaryService.postMessage(String uuid)	
-            webkit.messageHandlers.OneChat_getPrimaryService.postMessage(uuid_device);
-        } catch(error) {
-            alert('getPrimaryService ' + error)
-        }
-    }
-    function getCharacteristic() {
-        try {
-            // webkit.messageHandlers.OneChat_getCharacteristic.postMessage(String uuid)
-            webkit.messageHandlers.OneChat_getCharacteristic.postMessage(uuid_service);
-        } catch(error) {
-            alert('getCharacteristic (error)' + error)
-        }
-    }
-    function writeCharacteristicByUUID() {
-        try {
-            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
-                device_uuid: uuid_device,
-                service_uuid: uuid_service,
-                characteristic_uuid: uuid_characteristic_write,
-                data: datawrite,
-                data_type : data_type
-            });
-        } catch(error) {
-            alert('writeCharacteristicByUUID ' + error)
-        }
-    }
-    function writeCharacteristicByUUID2() {
-        try {
-            // webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({device_uuid:String, service_uuid:String, characteristic_uuid:String, data:String})
-            webkit.messageHandlers.OneChat_writeCharacteristicByUUID.postMessage({
-                device_uuid: uuid_device,
-                service_uuid: uuid_service,
-                characteristic_uuid: uuid_characteristic_write,
-                data: datawrite2,
-                data_type : data_type
-            });
-        } catch(error) {
-            alert('writeCharacteristicByUUID2' + error)
-        }
-    }
-    function padlock(){
-        writeCharacteristicByUUID()
-        setTimeout(() => { writeCharacteristicByUUID2() }, 5000);   
-    }
-    function OneChat_readCharacteristicByUUID() {
-        try {
-            // webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({device_uuid:String,service_uuid:String,characteristic_uuid:String})
-            webkit.messageHandlers.OneChat_readCharacteristicByUUID.postMessage({
-                device_uuid: uuid_device, 
-                service_uuid: uuid_service, 
-                characteristic_uuid: uuid_characteristic_read
-            });
-        } catch(error) {
-            alert('readCharacteristicByUUID ' + error)
-        }
-    }
+          try {
+              OneChat_scanDevice(time_scan);
+            //   OneChat_connectServiceByUUID(device_uuid, 'FFD5')
+            //   setTimeout(() => {
+            //             logtoHTML('1>>>>' + device_uuid);
+            //             OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', '2905050505050528', 'hex');
+                        
+                        // setTimeout(() => {
+                        // logtoHTML('2>>>>' + device_uuid);
+                        // OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
+                        //           }, 8000);
+                        // }, 8000);
+          }
+          catch(error) {
+        	    alert('scanDevice ' + error);
+          }
+      }
+    function write2() {
+          try {
+            // setTimeout(() => {
+                logtoHTML('2>>>>' + device_uuid);
+                OneChat_writeCharacteristicByUUID(device_uuid, 'FFD5', 'FFD9', 'FE4F50454E00000000FD', 'hex');
+                        // }, 8000);
+          }
+          catch(error) {
+        	    alert('write ' + error);
+          }
+      }
+      function write3() {
+          try {
+            // setTimeout(() => {
+                logtoHTML('3>>>>' + device_uuid);
+                OneChat_writeCharacteristic('FFD9', '2905050505050528', 'hex')
+                        // }, 8000);
+          }
+          catch(error) {
+        	    alert('write ' + error);
+          }
+      }
+      function write4() {
+          try {
+            // setTimeout(() => {
+                logtoHTML('4>>>>' + device_uuid);
+                OneChat_writeCharacteristic('FFD9', 'FE4F50454E00000000FD', 'hex')
+                        // }, 8000);
+          }
+          catch(error) {
+        	    alert('write ' + error);
+          }
+      }
 
-    function oneChatBluetoothCallBackData(type, data) {
+
+    window.addEventListener('oneChatBluetoothCallBackData',  async(e) => {
+        let message = '';
+
+        let type = e.detail.type;
+        let datastr = e.detail.data;
+        let data;
+
         try {
-            if (type == 'get_device_service') {
-                let obj = JSON.parse(data);
-                var message = ''
-                for (let i = 0; i < obj.data.length; i++) {
-                    let d = obj.data[i];
-                    let mfdata = 'N/A';
-                    let m = {}, mx;
-                    if (d.manufacturer_data) {
-                        try {
-                            mx = d.manufacturer_data.replace(/[{} ]/g,'');
-                            let arr= mx.split(',');
-                            for (let c of arr) {
-                                let b = c.split('=');
-                                m[b[0]] = b[1];
-                            }
-                            if (m) {
-                                mfdata = m.bytes;
-                            } 
-                        }
-                        catch(e) {
-                            m = 'error'
+            data = JSON.parse(datastr);
+        }
+        catch(e) {
+            data = {};
+        }
+
+        try {
+            if (type == 'return_once_device') {
+                    let d = data.data;
+                    logtoHTML(d);                    
+                    if (d.bluetooth_name == 'LOCK-10082C3FA29C') {
+                        let uuid = d.uuid
+                        device_uuid = uuid
+                        OneChat_getPrimaryService(device_uuid)
+                        OneChat_stopScanDevice();
+                    }
+
+            } else if (type == 'get_service') {
+                let d = data.data;
+                    logtoHTML('service uuid >>>>>>' + d);
+                    for (let i = 0; i < d.length; i++) {
+                        let obj = d[i];
+                        if (obj == 'FFD5') {
+                            OneChat_getCharacteristic(obj) 
+                            logtoHTML('service uuid >>>>>>' + obj);
                         }
                     }
 
-                    message += `
-                        name : ${d.bluetooth_name}<br>
-                        uuid : ${d.uuid}<br>
-                        manufacturer_data : ${mfdata}<br>
-                        state : ${d.state}<br>
-                        rssi : ${d.rssi}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
-                document.getElementById("listdevice").innerHTML=message;
-
-            } else if (type == 'start_scan_bluetooth') {
-                let obj = JSON.parse(data);
-                var message = ''
-                    message += `
-                        status : ${obj.type}<br>
-                        message : ${obj.message}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                document.getElementById("startdevice").innerHTML=message;
-
-            } else if (type == 'get_service') {
-                let obj = JSON.parse(data);
-                var message = ''
-                for (let i = 0; i < obj.data.length; i++) {
-                    let obj2 = obj.data[i];
-                    message += `
-                        service : ${obj2}<br>
-                        device : ${obj.device_name}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
-                document.getElementById("listservice").innerHTML=message;
-
             } else if (type == 'get_characteristic') {
-                let obj = JSON.parse(data);
-                alert ('obj>>>>' + obj)
-                var message = ''
-                for (let i = 0; i < obj.data.length; i++) {
-                    let obj2 = obj.data[i]
+                    let d = data.data;
+                    for (let i = 0; i < d.length; i++) {
+                        let obj = d[i]
 
-                    message += `
-                        uuid : ${obj2.uuid}<br>
-                        type : ${obj2.type}<br>
-                        descriptors : ${obj2.descriptors}<br>
-                        -----------------------------------------------------<br>
-                    `;
-                }
-                document.getElementById("listcharacteristic").innerHTML=message;
+                        message += `
+                            uuid : ${obj.uuid}<br>
+                            type : ${obj.type}<br>
+                            descriptors : ${obj.descriptors}<br>
+                            -----------------------------------------------------<br>
+                        `;
+                    } logtoHTML('>>>>>>' + message);
+                    
 
             } else if (type == 'write_characteristic_by_uuid') {
-                alert (data)
-                let obj = JSON.parse(data);
-                var message = ''
-                    message += `
-                        data : ${obj.data}<br>
-                        device_name : ${obj.device_name}<br>
-			            device_uuid: ${obj.device_uuid}<br>
-                        service_uuid: ${obj.service_uuid}<br>
-                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
-                        -----------------------------------------------------<br>`;
+                logtoHTML('write');
+                let d = data
+                if (d) {
 
-                document.getElementById("writeUUID").innerHTML=message;
-                
-            } else if (type == 'read_characteristic_by_uuid_V2') {
-                alert (data)
-                let obj = JSON.parse(data);
-                var message = ''
-                    message += `
-                        data : ${obj.data}<br>
-                        device_name : ${obj.device_name}<br>
-			            device_uuid: ${obj.device_uuid}<br>
-                        service_uuid: ${obj.service_uuid}<br>
-                        characteristic_uuid: ${obj.characteristic_uuid}<br> 
-                        -----------------------------------------------------<br>`;
+                        logtoHTML('writing by uuid >>>> ' + d.device_uuid)
+                        logtoHTML('service >>>> ' + d.service_uuid )
+                        logtoHTML('character >>>> ' + d.characteristic_uuid )
+                        logtoHTML('data >>>> ' + d.data )
 
-                document.getElementById("readUUID").innerHTML=message;
-}
+                        if (d.data == 'FE4F50454E00000000FD') {
+                            setTimeout(() => {
+                                OneChat_disconnectBluetoothByUUID(d.device_uuid);
+                                logtoHTML("disconnecting...");
+                            }, 5000);
+                        }
+                }
+            
+            } else if (type == 'write_characteristic') {
+                logtoHTML('write');
+                let a = data
+                if (a) {
+                        logtoHTML('character >>>> ' + a.characteristic_uuid )
+                        logtoHTML('data >>>> ' + a.data )
+
+                        if (a.data == 'FE4F50454E00000000FD') {
+                            setTimeout(() => {
+                                OneChat_disconnectBluetoothByUUID(device_uuid);
+                                logtoHTML("disconnecting...");
+                            }, 5000);
+                        }
+                }
+
+            } else if (type == 'disconnect_bluetooth_by_uuid') {
+                logtoHTML("disconnected");
+            }
         }
         catch(error) {
-            alert('error >>>>>>>> ' + error);
+
         }        
-    }
+    });
 
 </script>
 <body>
+
     <h1>
-        <a href="javascript:padlock();">[ Open padlock ]</a>
-    </h1>
-        <!-- <div id="startdevice" width=300></div> -->
-    <h1>
-        <a href="javascript:scanDevice();">[ start scan device ]</a>
-    </h1>
-        <div id="startdevice" width=300></div>
-    <h1>
-        <a href="javascript:scanDevice();">[ scan device ]</a>
-    </h1>
-        <div id="listdevice" width=300></div>
-    <h1>
-        <a href="javascript:getPrimaryService();">[ get service ]</a>
-    </h1>
-        <div id="listservice" width=300></div>
-    <h1>
-        <a href="javascript:getCharacteristic();">[ get Characteristic ]</a>
-    </h1>
-        <div id="listcharacteristic" width=300></div>
-    <h1>
-        <a href="javascript:writeCharacteristicByUUID();">[ write password "HEX" by UUID ]</a>
+        <a href="javascript:scanDevice();">[ Open padlock ]</a>
     </h1>
     <h1>
-        <a href="javascript:writeCharacteristicByUUID2();">[ write open "HEX2" by UUID ]</a>
+        <a href="javascript:write2();">[ password ]</a>
     </h1>
-        <div id="writeUUID" width=300></div>
     <h1>
-        <a href="javascript:OneChat_readCharacteristicByUUID();">[ read by UUID ]</a>
+        <a href="javascript:write3();">[ write1 ]</a>
     </h1>
-        <div id="readUUID" width=300></div>
+    <h1>
+        <a href="javascript:write4();">[ write2 ]</a>
+    </h1>
+    <div id="devicelist" width=300></div>
     
 </body>
 </html>
