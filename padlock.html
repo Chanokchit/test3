@@ -15,6 +15,7 @@
     var service_uuid = 'FFD5'
     var characteristic_uuid = 'FFD9'
     var data_1 = '2905050505050528'
+    var data_1_1 = '2901020304010228'
     var data_2 = 'FE4F50454E00000000FD'
     // var uuid_characteristic_write = characteristic_uuid
     // var data_type = 'hex'
@@ -52,10 +53,10 @@
                         logtoHTML('1>>>>' + device_uuid);
                         OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_1, 'hex');
                         
-                        setTimeout(() => {
-                        logtoHTML('2>>>>' + device_uuid);
-                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
-                                  }, 8000);
+                        // setTimeout(() => {
+                        // logtoHTML('2>>>>' + device_uuid);
+                        // OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
+                        //           }, 8000);
                         }, 8000);
           }
           catch(error) {
@@ -63,6 +64,25 @@
           }
       }
       function marwan() {
+          try {
+              num = 1;
+              OneChat_scanDevice(time_scan);
+            //   OneChat_connectServiceByUUID(device_uuid, service_uuid)
+              setTimeout(() => {
+                        logtoHTML('1>>>>' + device_uuid + 'service>>>>' + service_uuid2 + 'charac>>>' + characteristic_uuid2 + 'data >>>>' + data_1_1);
+                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid2, characteristic_uuid2, data_1_1, 'hex');
+                        
+                        // setTimeout(() => {
+                        // logtoHTML('2>>>>' + device_uuid);
+                        // OneChat_writeCharacteristicByUUID(device_uuid, service_uuid2, characteristic_uuid2, data_2, 'hex');
+                        //           }, 8000);
+                        }, 7000);
+          }
+          catch(error) {
+        	    alert('scanDevice ' + error);
+          }
+      }
+      function marwan2() {
           try {
               num = 1;
               OneChat_scanDevice(time_scan);
@@ -114,9 +134,10 @@
                 num = 1;
                 OneChat_scanDevice(time_scan);
 
-                logtoHTML('1>>>>' + device_uuid);
-                OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_1, 'hex');
-                        // }, 8000);
+                setTimeout(() => {
+                    logtoHTML('1>>>>' + device_uuid);
+                    OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_1, 'hex');
+                        }, 5000);
           }
           catch(error) {
         	    alert('write ' + error);
@@ -188,9 +209,22 @@
                     if (d.bluetooth_name == 'LOCK-10082C3FA29C') {
                         let uuid = d.uuid
                         device_uuid = uuid
-                        if (num == 2){
-                            OneChat_getPrimaryService(device_uuid)
-                        }
+                            if (num == 2){
+                                OneChat_getPrimaryService(device_uuid)
+                            }
+                        logtoHTML('num >>>>' + num);
+                        OneChat_stopScanDevice();
+                    // } else if (d.bluetooth_name == 'fern') {
+                    //     let uuid = d.uuid
+                    //     device_uuid = uuid
+                    //     OneChat_stopScanDevice();
+                    }
+                    if (d.bluetooth_name == 'LOCK-10082C3F8A1D') {
+                        let uuid = d.uuid
+                        device_uuid = uuid
+                        // if (num == 2){
+                        //     OneChat_getPrimaryService(device_uuid)
+                        // }
                         logtoHTML('num >>>>' + num);
                         OneChat_stopScanDevice();
                     // } else if (d.bluetooth_name == 'fern') {
@@ -286,7 +320,10 @@
         0.1 >>> <a href="javascript:fern();">[ Test ]</a>
     </h1>
     <h1>
-        0.2 >>> <a href="javascript:marwan();">[ Test marwan ]</a>
+        0.2 >>> <a href="javascript:marwan();">[ Test marwan - 1 data]</a>
+    </h1>
+    <h1>
+        0.3 >>> <a href="javascript:marwan2();">[ Test marwan - 2 data ]</a>
     </h1>
     ---------------------------------------------------------------------------------------
     <h1>
