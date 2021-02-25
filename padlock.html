@@ -7,8 +7,11 @@
 
     let time_scan = 10000;
     let device_uuid = '';
+    let device_uuid2 = 'A658ED45-BA23-BE46-5482-E1B5205D922A';
     let num = '';
     // var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
+    var service_uuid2 = '0000FFD5-0000-1000-8000-00805F9B34FB'
+    var characteristic_uuid2 = '0000FFD9-0000-1000-8000-00805F9B34FB'
     var service_uuid = 'FFD5'
     var characteristic_uuid = 'FFD9'
     var data_1 = '2905050505050528'
@@ -52,6 +55,42 @@
                         setTimeout(() => {
                         logtoHTML('2>>>>' + device_uuid);
                         OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
+                                  }, 8000);
+                        }, 8000);
+          }
+          catch(error) {
+        	    alert('scanDevice ' + error);
+          }
+      }
+      function marwan() {
+          try {
+              num = 1;
+              OneChat_scanDevice(time_scan);
+            //   OneChat_connectServiceByUUID(device_uuid, service_uuid)
+              setTimeout(() => {
+                        logtoHTML('1>>>>' + device_uuid);
+                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid2, characteristic_uuid2, data_1, 'hex');
+                        
+                        setTimeout(() => {
+                        logtoHTML('2>>>>' + device_uuid);
+                        OneChat_writeCharacteristicByUUID(device_uuid, service_uuid2, characteristic_uuid2, data_2, 'hex');
+                                  }, 8000);
+                        }, 8000);
+          }
+          catch(error) {
+        	    alert('scanDevice ' + error);
+          }
+      }
+      function fern() {
+          try {
+              OneChat_scanDevice(time_scan);
+              setTimeout(() => {
+                        logtoHTML('1>>>>' + device_uuid2);
+                        OneChat_writeCharacteristicByUUID(device_uuid2, '180D', '2A39', '2905050505050528', 'hex');
+
+                        setTimeout(() => {
+                        logtoHTML('2>>>>' + device_uuid2);
+                        OneChat_writeCharacteristicByUUID(device_uuid2, '180D', '2A39', 'FE4F50454E00000000FD', 'hex');
                                   }, 8000);
                         }, 8000);
           }
@@ -117,11 +156,21 @@
           }
       }
 
+      function disconnect() {
+          try {
+            OneChat_disconnectBluetoothByUUID(device_uuid);
+          }
+          catch(error) {
+        	    alert('disconnect ' + error);
+          }
+      }
+
 
     window.addEventListener('oneChatBluetoothCallBackData',  async(e) => {
         let message = '';
 
         let type = e.detail.type;
+        logtoHTML ('*** type >>>>>' + type)
         let datastr = e.detail.data;
         let data;
 
@@ -144,6 +193,23 @@
                         }
                         logtoHTML('num >>>>' + num);
                         OneChat_stopScanDevice();
+                    // } else if (d.bluetooth_name == 'fern') {
+                    //     let uuid = d.uuid
+                    //     device_uuid = uuid
+                    //     OneChat_stopScanDevice();
+                    }
+                    if (d.bluetooth_name == 'LOCK-999999999998') {
+                        let uuid = d.uuid
+                        device_uuid = uuid
+                        // if (num == 2){
+                        //     OneChat_getPrimaryService(device_uuid)
+                        // }
+                        logtoHTML('num >>>>' + num);
+                        OneChat_stopScanDevice();
+                    // } else if (d.bluetooth_name == 'fern') {
+                    //     let uuid = d.uuid
+                    //     device_uuid = uuid
+                    //     OneChat_stopScanDevice();
                     }
 
             } else if (type == 'get_service') {
@@ -183,7 +249,7 @@
 
                         if (d.data == data_2) {
                             setTimeout(() => {
-                                OneChat_disconnectBluetoothByUUID(d.device_uuid);
+                                // OneChat_disconnectBluetoothByUUID(d.device_uuid);
                                 logtoHTML("disconnecting...");
                             }, 5000);
                         }
@@ -198,7 +264,7 @@
 
                         if (a.data == data_2) {
                             setTimeout(() => {
-                                OneChat_disconnectBluetoothByUUID(device_uuid);
+                                // OneChat_disconnectBluetoothByUUID(device_uuid);
                                 logtoHTML("disconnecting...");
                             }, 5000);
                         }
@@ -216,6 +282,13 @@
 </script>
 <body>
 
+    <h1>
+        0.1 >>> <a href="javascript:fern();">[ Test ]</a>
+    </h1>
+    <h1>
+        0.2 >>> <a href="javascript:marwan();">[ Test marwan ]</a>
+    </h1>
+    ---------------------------------------------------------------------------------------
     <h1>
         1. >>> <a href="javascript:scanDevice();">[ Open padlock -- write characteristic_uuid ]</a>
     </h1>
@@ -237,7 +310,12 @@
     <h1>
         3.1 >>> <a href="javascript:writepassword_uuid2();">[ write by uuid data 2 ]</a>
     </h1>
+    ---------------------------------------------------------------------------------------
+    <h1>
+        disconnect >>> <a href="javascript:disconnect();">[ disconnect_bluetooth_by_uuid ]</a>
+    </h1>
+    ---------------------------------------------------------------------------------------
     <div id="devicelist" width=300></div>
-    
+
 </body>
 </html>
