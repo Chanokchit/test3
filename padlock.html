@@ -236,7 +236,7 @@
             if (type == 'return_once_device') {
                     let d = data.data;
                     logtoHTML(d);                    
-                    if (d.bluetooth_name == 'LOCK-10082C3FA29C') {
+                    if (d.bluetooth_name.startsWith("LOCK")) {
                         let uuid = d.uuid
                         device_uuid = uuid
                             // if (num == 2){
@@ -249,19 +249,19 @@
                     //     device_uuid = uuid
                     //     OneChat_stopScanDevice();
                     }
-                    else if (d.bluetooth_name == 'LOCK-10082C3F8A1D') {
-                        let uuid = d.uuid
-                        device_uuid = uuid
-                        // if (num == 2){
-                        //     OneChat_getPrimaryService(device_uuid)
-                        // }
-                        logtoHTML('num >>>>' + num);
-                        OneChat_stopScanDevice();
-                    // } else if (d.bluetooth_name == 'fern') {
+                    // else if (d.bluetooth_name == 'LOCK-10082C3F8A1D') {
                     //     let uuid = d.uuid
                     //     device_uuid = uuid
+                    //     // if (num == 2){
+                    //     //     OneChat_getPrimaryService(device_uuid)
+                    //     // }
+                    //     logtoHTML('num >>>>' + num);
                     //     OneChat_stopScanDevice();
-                    }
+                    // // } else if (d.bluetooth_name == 'fern') {
+                    // //     let uuid = d.uuid
+                    // //     device_uuid = uuid
+                    // //     OneChat_stopScanDevice();
+                    // }
                     // if (d.bluetooth_name == 'LOCK-999999999998') {
                     //     let uuid = d.uuid
                     //     device_uuid = uuid
