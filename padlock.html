@@ -10,7 +10,7 @@
     let device_uuid2 = 'A658ED45-BA23-BE46-5482-E1B5205D922A';
     let num = '';
     // var uuid_device = '9B29E7FC-0C99-C207-1B7A-A4EF0A871B73'
-    // var service_uuid = '0000FFD5-0000-1000-8000-00805F9B34FB'
+    var service_uuid2 = '0000FFD5-0000-1000-8000-00805F9B34FB'
     // var characteristic_uuid = '0000FFD9-0000-1000-8000-00805F9B34FB'
     var service_uuid = 'FFD5'
     var characteristic_uuid = 'FFD9'
@@ -58,9 +58,9 @@
                         OneChat_getPrimaryService(device_uuid)
                         // setTimeout(() => {
                         // OneChat_getCharacteristic(service_uuid) 
-                        setTimeout(() => {
-                            OneChat_writeCharacteristic(characteristic_uuid, data_2, 'hex')//service คืออะไร 
-                        }, 5000);
+                            setTimeout(() => {
+                                OneChat_writeCharacteristic(characteristic_uuid, data_2, 'hex')//service คืออะไร 
+                            }, 5000);
                         // }, 5000);
                         // OneChat_writeCharacteristicByUUID(device_uuid, service_uuid, characteristic_uuid, data_2, 'hex');
                                   }, 8000);
@@ -287,12 +287,17 @@
                     logtoHTML('service uuid >>>>>>' + d);
                     for (let i = 0; i < d.length; i++) {
                         let obj = d[i];
-                        // if (obj == service_uuid) {
-                        setTimeout(() => {
+                        if (obj == service_uuid) {
+                        // setTimeout(() => {
                             OneChat_getCharacteristic(service_uuid);
-                            // logtoHTML('service uuid >>>>>>' + obj);
-                        // }
-                        }, 30000); 
+                            logtoHTML('service uuid >>>>>>' + obj);
+                        // }, 10000);
+                        }
+                        else if (obj == service_uuid2) {
+                            OneChat_getCharacteristic(service_uuid);
+                            logtoHTML('service uuid >>>>>>' + obj);
+                        }
+                         
                     }
 
             } else if (type == 'get_characteristic') {
@@ -332,7 +337,7 @@
                 let a = data
                 if (a) {
                         logtoHTML('character >>>> ' + a.characteristic_uuid )
-                        logtoHTML('service >>>> ' + a.service_uuid )
+                        // logtoHTML('service >>>> ' + a.service_uuid )
                         logtoHTML('data >>>> ' + a.data )
 
                         if (a.data == data_2) {
